@@ -134,10 +134,6 @@ public class GeneralUtilities extends ActionClass {
 
 	}
 
-	public void readCSVFileToArray() {
-
-	}
-
 	public int toGetTheNumberOfFieldsInCSV(File file) throws Exception {
 		int CsvColumnCount = 0;
 		CSVReader csvReader = new CSVReader(new FileReader(file));
