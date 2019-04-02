@@ -479,7 +479,10 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		System.out.println("This is the csv validation");
 
-		File file = generalUtilities.getLatestFileFromDir(System.getProperty("user.dir") + "\\Downloads");
+		// File file =
+		// generalUtilities.getLatestFileFromDir(System.getProperty("user.dir") +
+		// "\\Downloads");
+		File file = generalUtilities.getLatestFileFromDir("Downloads");
 		int CsvColumnCount = 0;
 
 		// ObjdownloadFile=new

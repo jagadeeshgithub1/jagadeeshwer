@@ -3,8 +3,10 @@
  */
 package utilities;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.text.SimpleDateFormat;
 
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -14,6 +16,8 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.opencsv.CSVReader;
 
 /**
  * @author deepa :This class consists of basic excel utility functions required
@@ -203,6 +207,40 @@ public class ExcelUtils {
 
 		return RowCount;
 
+	}
+
+	public File getLatestFileFromDir(String dirPath) {
+		File dir = new File(dirPath);
+
+		File[] files = dir.listFiles();
+
+		if (files == null || files.length == 0) {
+			return null;
+		}
+
+		File lastModifiedFile = files[0];
+		for (int i = 1; i < files.length; i++) {
+			if (lastModifiedFile.lastModified() < files[i].lastModified()) {
+				lastModifiedFile = files[i];
+
+				System.out.println(lastModifiedFile);
+			}
+		}
+		return lastModifiedFile;
+
+	}
+
+	public int toGetTheNumberOfFieldsInCSV(File file) throws Exception {
+		int CsvColumnCount = 0;
+		CSVReader csvReader = new CSVReader(new FileReader(file));
+
+		String[] header = csvReader.readNext();
+
+		if (header != null) {
+			CsvColumnCount = header.length;
+		}
+
+		return CsvColumnCount;
 	}
 
 }
