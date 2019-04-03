@@ -5,6 +5,7 @@ package utilities;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -113,10 +114,21 @@ public class GeneralUtilities extends ActionClass {
 		driver = new ChromeDriver(options);
 	}
 
-	public File getLatestFileFromDir(String dirPath) {
+	public File getLatestFileFromDir(String dirPath, String pattern) {
 		File dir = new File(dirPath);
 
-		File[] files = dir.listFiles();
+		// File[] files = dir.listFiles();
+		File[] files = dir.listFiles(new FilenameFilter() {
+
+			@Override
+			public boolean accept(File dir, String name) {
+				if (name.startsWith(pattern)) {
+					return true;
+				}
+				// TODO Auto-generated method stub
+				return false;
+			}
+		});
 
 		if (files == null || files.length == 0) {
 			return null;

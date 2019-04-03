@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import driver.DriverEngine;
 
-public class regressionCases {
+public class RegressionCases {
 
 	DriverEngine driverEngine = null;
 

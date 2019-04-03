@@ -3,11 +3,11 @@
 <suite name="Failed suite [Suite]">
   <test thread-count="5" name="Test(failed)">
     <classes>
-      <class name="regressionTests.regressionCases">
+      <class name="regressionTests.RegressionCases">
         <methods>
           <include name="DefineBrainTests"/>
         </methods>
-      </class> <!-- regressionTests.regressionCases -->
+      </class> <!-- regressionTests.RegressionCases -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [Suite] -->

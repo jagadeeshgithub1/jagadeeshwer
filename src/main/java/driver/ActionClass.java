@@ -482,7 +482,7 @@ public class ActionClass extends TestBaseClass {
 		// File file =
 		// generalUtilities.getLatestFileFromDir(System.getProperty("user.dir") +
 		// "\\Downloads");
-		File file = generalUtilities.getLatestFileFromDir("Downloads");
+		File file = generalUtilities.getLatestFileFromDir("Downloads", "BatchDecisionOutput");
 		int CsvColumnCount = 0;
 
 		// ObjdownloadFile=new
