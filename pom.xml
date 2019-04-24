@@ -114,5 +114,35 @@
     <artifactId>opencsv</artifactId>
     <version>3.3</version>
 </dependency>
+
+<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>3.3.0</version>
+   
+</dependency>
+<dependency>
+    <groupId>com.googlecode.json-simple</groupId>
+    <artifactId>json-simple</artifactId>
+    <version>1.1.1</version>
+</dependency>
+<dependency>
+	<groupId>io.rest-assured</groupId>
+	<artifactId>rest-assured</artifactId>
+	<version>3.1.0</version>
+	<scope>test</scope>
+</dependency>
+<dependency>
+  <groupId>org.hamcrest</groupId>
+  <artifactId>hamcrest-library</artifactId>
+  <version>1.3</version>
+  <scope>test</scope>
+</dependency>
+<dependency>
+<groupId>org.seleniumhq.selenium</groupId>
+<artifactId>htmlunit-driver</artifactId>
+<version>2.33.2</version>
+</dependency>
   </dependencies>
 </project>

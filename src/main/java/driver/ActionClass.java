@@ -6,6 +6,9 @@
  */
 package driver;
 
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.get;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,6 +32,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.opencsv.CSVReader;
 
 import base.TestBaseClass;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import utilities.ExcelUtils;
 import utilities.GeneralUtilities;
 
@@ -113,6 +121,7 @@ public class ActionClass extends TestBaseClass {
 				Actions action = new Actions(driver);
 				System.out.println("is this the element???>>" + element);
 				action.moveToElement(element).click(element).build().perform();
+				Thread.sleep(5000);
 				// action.moveToElement(element).sendKeys(Keys.RETURN);
 				// driver.findElement(By.xpath(prop.getProperty(object))).click();
 
@@ -128,7 +137,7 @@ public class ActionClass extends TestBaseClass {
 			flag = false;
 			// TODO: handle exception
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("element is not present");
 			flag = false;
 			// TODO: handle exception
 		}
@@ -253,6 +262,70 @@ public class ActionClass extends TestBaseClass {
 		} catch (Exception e) {
 			flag = false;
 			// TODO: handle exception
+		}
+
+		return flag;
+
+	}
+
+	public boolean rollBackToBaselineVersion(String versionId) {
+
+		boolean flag = false;
+
+		// below code switch to the frame
+
+		driver.switchTo().frame(1);
+
+		WebElement btnRollbackTab = null;
+
+		// code to identify the tab with the version id
+		try {
+			btnRollbackTab = new WebDriverWait(driver, 40).until(ExpectedConditions
+					.presenceOfElementLocated(By.xpath("//div[@id='version-container']/div[@versionid='"
+							+ versionId.trim() + "']/preceding-sibling::button[@type='button']")));
+
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			System.out.println("Rollback button is not present");
+			return flag;
+		}
+		// code to click the button of the baseline version tab
+		try {
+			btnRollbackTab.click();
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			System.out.println("Rollback button didnt click");
+			return flag;
+		}
+
+		// locating the Rollback button
+
+		WebElement btnRollback = null;
+
+		try {
+			btnRollback = new WebDriverWait(driver, 40).until(ExpectedConditions.presenceOfElementLocated(
+					By.xpath("//div[@versionid='" + versionId.trim() + "']//a[contains(text(),'Rollback To')]")));
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+
+			System.out.println("Rollback button is not present");
+			return flag;
+		}
+
+		try {
+			btnRollback.click();
+			Thread.sleep(5000);
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			System.out.println("Rollback button is not clicked" + btnRollback);
 		}
 
 		return flag;
@@ -414,6 +487,170 @@ public class ActionClass extends TestBaseClass {
 		return flag;
 	}
 
+	public boolean deSelectCheckboxes(String object) {
+		/*
+		 * @author:Deepa Panikkaveetil
+		 * 
+		 * @date:4/05/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for unchecking the check boxes
+		 * 
+		 * @Parameter:Passing the xpath of the web elements
+		 */
+
+		List<WebElement> checkBoxes = driver.findElements(By.xpath(prop.getProperty(object)));
+		int limit = checkBoxes.size();
+		boolean flag = false;
+
+		// below code leaves the OBCC checked as its mandatory to keep one checked for
+		// the channel
+		try {
+			for (int i = 1; i < limit; i++) {
+				if (checkBoxes.get(i).isSelected()) {
+					checkBoxes.get(i).click();
+				}
+			}
+			flag = true;
+		} catch (Exception e) {
+
+			// TODO Auto-generated catch block
+			flag = false;
+		}
+
+		return flag;
+
+	}
+
+	public boolean checkboxSelect(String object) {
+		boolean flag = false;
+
+		WebElement chkBox = null;
+		try {
+			chkBox = new WebDriverWait(driver, 50)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+		}
+
+		if (!chkBox.isSelected()) {
+			chkBox.click();
+			flag = true;
+		}
+
+		return flag;
+	}
+
+	public boolean checkboxUncheck(String object) {
+		boolean flag = false;
+
+		WebElement chkBox = null;
+		try {
+			chkBox = new WebDriverWait(driver, 50)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+		}
+
+		if (chkBox.isSelected()) {
+			chkBox.click();
+			flag = true;
+		}
+
+		return flag;
+
+	}
+
+	// Below code dynamically creates the xpath for the trigger check box during the
+	// event creation
+	public boolean checkTriggerEvent(String titleOftheEvent) {
+		boolean flag = false;
+		WebElement chkTrigger = null;
+		try {
+			chkTrigger = new WebDriverWait(driver, 40).until(ExpectedConditions.presenceOfElementLocated(
+					By.xpath("(//tr/td/div[@title='" + titleOftheEvent.trim() + "']/following::td/input)[1]")));
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			System.out.println("element is not located" + chkTrigger);
+			return flag;
+		}
+		if (!chkTrigger.isSelected()) {
+			chkTrigger.click();
+			flag = true;
+		}
+
+		return flag;
+
+	}
+
+	public boolean keyPressEnter(String object) {
+		boolean flag = false;
+		try {
+			driver.findElement(By.xpath(prop.getProperty(object))).sendKeys(Keys.ENTER);
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("KeyPressEnter didn't complete");
+			flag = false;
+		}
+
+		return flag;
+
+	}
+
+	public boolean byPassArbitrationSelection(String offerName, String eventName) {
+		boolean flag = false;
+
+		// below code locate the toggle button for arbitration
+		WebElement btnArbitration = new WebDriverWait(driver, 30)
+				.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//td[contains(text(),'" + offerName.trim()
+						+ "')]//following::div/button[@id='bypass-arb'])[1]")));
+		if (btnArbitration.getAttribute("autocomplete").equals("off")) {
+			btnArbitration.click();
+			flag = true;
+		}
+
+		// below code locate the inputbox for the event to select
+
+		WebElement txtEvent = null;
+		try {
+			txtEvent = new WebDriverWait(driver, 30)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath("((//h3[contains(text(),'" + offerName
+							+ " Arbitration')]/parent::div/parent::div)/following-sibling::div//input)[3]")));
+			flag = true;
+		} catch (Exception e) {
+			flag = false;
+			System.out.println("input text is not located:" + txtEvent);
+			return flag;
+
+		}
+
+		// below code select the event name
+
+		try {
+			txtEvent.sendKeys(eventName);
+			txtEvent.sendKeys(Keys.ENTER);
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			System.out.println("Entering event failed");
+			return flag;
+		}
+
+		return flag;
+
+	}
+
 	public boolean elementPropertyCheck(String object, String expProperty) {
 
 		/*
@@ -429,21 +666,17 @@ public class ActionClass extends TestBaseClass {
 		 * 
 		 * @Parameter:Passing the xpath of the web element , and the expected text in
 		 * the element
-		 * 
-		 * 
-		 * 
 		 */
 		boolean flag = false;
 		try {
-			new WebDriverWait(driver, 300)
+			boolean stat = new WebDriverWait(driver, 300)
 					.until(ExpectedConditions.textToBe(By.xpath(prop.getProperty(object)), expProperty.trim()));
-			/*
-			 * if (driver.findElement(By.xpath(prop.getProperty(object))).getText().equals(
-			 * expProperty.trim())) { flag = true;
-			 * 
-			 * } else { flag = false; }
-			 */
-			flag = true;
+			if (stat == true) {
+				flag = true;
+			} else {
+				flag = false;
+				return flag;
+			}
 		} catch (TimeoutException e) {
 			flag = false;
 			System.out.println("Are you sure the element text has changed to??" + expProperty);
@@ -457,7 +690,22 @@ public class ActionClass extends TestBaseClass {
 		return flag;
 	}
 
-	public boolean ValidateBatchDecisionOutputCSV() {
+	public boolean ValidateBatchDecisionOutputCSV(String testCaseID) {
+
+		/*
+		 * @author:Deepa Panikkaveetil
+		 * 
+		 * @date:3/20/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for validating the downloded csv
+		 * 
+		 * @Parameter:Passing the xpath of the web element , and the expected text in
+		 * the element
+		 */
 
 		GeneralUtilities generalUtilities = null;
 		String ColumnToBeValidated = null;
@@ -471,7 +719,7 @@ public class ActionClass extends TestBaseClass {
 		}
 		ExcelUtils ObjTestdataFile = null;
 		try {
-			ObjTestdataFile = new ExcelUtils("TestDataAndResults\\SophieAutomation.xlsx");
+			ObjTestdataFile = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -479,44 +727,61 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		System.out.println("This is the csv validation");
 
-		// File file =
-		// generalUtilities.getLatestFileFromDir(System.getProperty("user.dir") +
-		// "\\Downloads");
 		File file = generalUtilities.getLatestFileFromDir("Downloads", "BatchDecisionOutput");
-		int CsvColumnCount = 0;
+		if (file == null) {
 
-		// ObjdownloadFile=new
-		// ExcelUtils("Downloads\\BatchDecisionOutput_20190312T091111.537 GMT.xlsx");
-		// ObjTestdataFile=new ExcelUtils("TestData\\SophieTestData.xlsx");
+			return false;
+		} else {
+			int CsvColumnCount = 0;
 
-		// Getting the column count for the downloaded csv
-		try {
-			CsvColumnCount = generalUtilities.toGetTheNumberOfFieldsInCSV(file);
-			System.out.println(CsvColumnCount);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			// Below code is to get the column count for the downloaded csv
+			try {
+				CsvColumnCount = generalUtilities.toGetTheNumberOfFieldsInCSV(file);
+				System.out.println(CsvColumnCount);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		CSVReader csvReader = null;
-		try {
-			csvReader = new CSVReader(new FileReader(file));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			CSVReader csvReader = null;
+			try {
+				csvReader = new CSVReader(new FileReader(file));
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		List<String[]> records = null;
-		try {
-			records = csvReader.readAll();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			List<String[]> records = null;
+			try {
+				records = csvReader.readAll();
+				csvReader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
-		try {
+			// try {
+			int iTestStart = 0;
+			int iTestEnd = 0;
 
-			for (int i = 4; i <= ObjTestdataFile.getRowCount("BatchDecisionOutputValidations"); i++) {
+			// for (int it = 4; it <=
+			// ObjTestdataFile.getRowCount("BatchDecisionOutputValidations"); it++) {
+
+			try {
+				iTestStart = ObjTestdataFile.getRowContains(testCaseID, "TestCaseID", "BatchDecisionOutputValidations");
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("method getRowContains fails ");
+			}
+			try {
+				iTestEnd = ObjTestdataFile.getTestStepsCount("BatchDecisionOutputValidations", testCaseID, iTestStart,
+						"TestCaseID");
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				System.out.println("method getTestStepsCount fails ");
+			}
+			// }
+			for (int i = iTestStart; i <= iTestEnd; i++) {
 				ColumnToBeValidated = ObjTestdataFile.getCellData("BatchDecisionOutputValidations", i,
 						"ColumnToBeValidated");
 
@@ -557,14 +822,96 @@ public class ActionClass extends TestBaseClass {
 				}
 			}
 
+			// The below code will move the downloaded CSV from Downloads to
+
+			try {
+
+				// here should do the code to move the file to Archive
+
+				File dest = new File("Downloads\\Archive\\");
+
+				if (generalUtilities.CopyFile(file, dest)) {
+					System.out.println("File moved to archive");
+				} else {
+					System.err.println("File move failed");
+				}
+
+				// return true;
+			}
+
+			catch (Exception e) {
+
+				// return false;
+				// TODO: handle exception
+			}
+
 			return true;
 		}
 
-		catch (Exception e) {
+		// catch (Exception e) {
 
-			return false;
-			// TODO: handle exception
+		// return false;
+		// TODO: handle exception
+		// }
+
+	}
+
+	public boolean RealtimeEventGetAPi(String partyID, String eventName) {
+
+		/*
+		 * @author:Jagaish Reddy
+		 * 
+		 * @date:4/23/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for calling the event API
+		 * 
+		 * @Parameter:Passing the partyID and eventName
+		 */
+
+		boolean flag = false;
+		// String URL = null;
+		RestAssured.authentication = RestAssured.preemptive().basic(prop.getProperty("apiUser"),
+				prop.getProperty("apiPasswd"));
+
+		String URL = prop.getProperty("eventAPIURL") + partyID.trim() + "&context=event=" + eventName;
+
+		RestAssured.baseURI = URL;
+
+		Response response = get(baseURI);
+
+		JsonPath jsonPathEvaluator = response.jsonPath();
+		if (response.getStatusCode() == 200) {
+
+			String Data_reponse = response.asString();
+
+			System.out.println(Data_reponse);
+			ResponseBody body = response.getBody();
+			String responseBody = body.asString();
+			JsonPath jsonPathEvaluator1 = response.jsonPath();
+			if (jsonPathEvaluator.get("Message") == null) {
+				System.out.println(
+						"Trigger event sucess with Message with  IsFailed is " + jsonPathEvaluator.get("IsFailed"));
+
+			}
+
+			else {
+
+				System.out.println(
+						"Trigger event Fail with  Message with IsFailed is " + jsonPathEvaluator.get("IsFailed"));
+
+			}
+			flag = true;
+
+		} else {
+			flag = false;
+			System.out.println("Get request fail due to  status code " + response.getStatusCode());
+			return flag;
 		}
+		return flag;
 
 	}
 

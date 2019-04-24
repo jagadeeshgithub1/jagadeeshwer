@@ -28,6 +28,7 @@ public class ExcelUtils {
 	public FileInputStream fis = null;
 	public FileOutputStream fout = null;
 	public XSSFWorkbook wbk = null;
+	public XSSFWorkbook wbk2 = null;
 	public XSSFWorkbook wbkResult = null;
 	public XSSFSheet sh = null;
 	public XSSFCell Cell = null;
@@ -137,6 +138,8 @@ public class ExcelUtils {
 
 			Cell.setCellValue(data);
 
+			// String excelPath2=excelPath.
+
 			fout = new FileOutputStream(excelPath);
 
 			wbk.write(fout);
@@ -150,6 +153,19 @@ public class ExcelUtils {
 		return true;
 	}
 
+	// this method is used to save the file in the path provided
+	public void saveFile(String Path) {
+		try {
+			FileOutputStream fileOut = new FileOutputStream(Path);
+			// wbk2 = new XSSFWorkbook(fileOut);
+			wbk.write(fileOut);
+			fileOut.close();
+		} catch (Exception e) {
+
+		}
+	}
+
+	// this method to get the rowcount of the sheetname
 	public int getRowCount(String SheetName) {
 
 		sh = wbk.getSheet(SheetName);
@@ -180,10 +196,10 @@ public class ExcelUtils {
 	public int getTestStepsCount(String SheetName, String sTestCaseID, int iTestCaseStart, String columnName)
 			throws Exception {
 		int TestCount = 0;
-		for (int i = iTestCaseStart; i <= getRowCount(SheetName); i++) {
+		for (int i = iTestCaseStart; i < getRowCount(SheetName); i++) {
 			if (!sTestCaseID.equals(getCellData(SheetName, i, columnName))) {
-				TestCount = i;
-
+				TestCount = i - 1;
+				// TestCount = i;
 				return TestCount;
 			}
 		}
@@ -192,7 +208,7 @@ public class ExcelUtils {
 
 		sh = wbk.getSheet(SheetName);
 
-		TestCount = sh.getLastRowNum() + 1;
+		TestCount = sh.getLastRowNum();
 
 		return TestCount;
 	}
@@ -235,12 +251,14 @@ public class ExcelUtils {
 		CSVReader csvReader = new CSVReader(new FileReader(file));
 
 		String[] header = csvReader.readNext();
+		csvReader.close();
 
 		if (header != null) {
 			CsvColumnCount = header.length;
 		}
 
 		return CsvColumnCount;
+
 	}
 
 }

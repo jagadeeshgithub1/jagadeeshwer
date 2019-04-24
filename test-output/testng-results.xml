@@ -1,24 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="1" ignored="0" total="1" passed="0">
+<testng-results skipped="0" failed="1" ignored="0" total="2" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Suite" duration-ms="908383" started-at="2019-04-03T12:03:48Z" finished-at="2019-04-03T12:18:56Z">
+  <suite name="Default suite" duration-ms="991917" started-at="2019-04-23T12:56:44Z" finished-at="2019-04-23T13:13:16Z">
     <groups>
     </groups>
-    <test name="Test" duration-ms="908383" started-at="2019-04-03T12:03:48Z" finished-at="2019-04-03T12:18:56Z">
+    <test name="Default test" duration-ms="991917" started-at="2019-04-23T12:56:44Z" finished-at="2019-04-23T13:13:16Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="FAIL" signature="DefineBrainTests()[pri:0, instance:regressionTests.RegressionCases@5c30a9b0]" name="DefineBrainTests" duration-ms="908285" started-at="2019-04-03T12:03:48Z" finished-at="2019-04-03T12:18:56Z">
-          <exception class="java.lang.IllegalArgumentException">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@64f6106c]" name="setUp" is-config="true" duration-ms="54" started-at="2019-04-23T12:56:44Z" finished-at="2019-04-23T12:56:44Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="VerifyDownloadedCSV()[pri:1, instance:regressionTests.RegressionCases@64f6106c]" name="VerifyDownloadedCSV" duration-ms="1758" started-at="2019-04-23T12:56:44Z" finished-at="2019-04-23T12:56:46Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- VerifyDownloadedCSV -->
+        <test-method status="FAIL" signature="VerifyWithAPICalls()[pri:2, instance:regressionTests.RegressionCases@64f6106c]" name="VerifyWithAPICalls" duration-ms="990037" started-at="2019-04-23T12:56:46Z" finished-at="2019-04-23T13:13:16Z">
+          <exception class="java.net.MalformedURLException">
             <message>
-              <![CDATA[Cell index must be >= 0]]>
+              <![CDATA[no protocol: "http://auto-test-mavis74.adqura.com:80/prweb/PRRestService/AdquraNBAServices/1/triggerevent?partyid=123461.0&context=event=regression_event]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.IllegalArgumentException: Cell index must be >= 0
-at org.apache.poi.xssf.usermodel.XSSFRow.getCell(XSSFRow.java:270)
-at org.apache.poi.xssf.usermodel.XSSFRow.getCell(XSSFRow.java:259)
-at utilities.ExcelUtils.getCellData(ExcelUtils.java:80)
-at driver.DriverEngine.mainMethod(DriverEngine.java:104)
-at regressionTests.RegressionCases.DefineBrainTests(RegressionCases.java:21)
+              <![CDATA[java.net.MalformedURLException: no protocol: "http://auto-test-mavis74.adqura.com:80/prweb/PRRestService/AdquraNBAServices/1/triggerevent?partyid=123461.0&context=event=regression_event
+at java.net.URL.<init>(URL.java:593)
+at java.net.URL.<init>(URL.java:490)
+at java.net.URL.<init>(URL.java:439)
+at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+at org.codehaus.groovy.reflection.CachedConstructor.invoke(CachedConstructor.java:83)
+at org.codehaus.groovy.runtime.callsite.ConstructorSite$ConstructorSiteNoUnwrapNoCoerce.callConstructor(ConstructorSite.java:105)
+at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallConstructor(CallSiteArray.java:60)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:235)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callConstructor(AbstractCallSite.java:247)
+at io.restassured.internal.RequestSpecificationImpl.getTargetURI(RequestSpecificationImpl.groovy:1624)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:93)
+at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1213)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1022)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:810)
+at io.restassured.internal.RequestSpecificationImpl.invokeMethod(RequestSpecificationImpl.groovy)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:48)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.callCurrent(PogoInterceptableSite.java:58)
+at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:52)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:154)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:166)
+at io.restassured.internal.RequestSpecificationImpl.partiallyApplyPathParams(RequestSpecificationImpl.groovy:1760)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:93)
+at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1213)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1022)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:810)
+at io.restassured.internal.RequestSpecificationImpl.invokeMethod(RequestSpecificationImpl.groovy)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:48)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.callCurrent(PogoInterceptableSite.java:58)
+at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:52)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:154)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:182)
+at io.restassured.internal.RequestSpecificationImpl.newFilterContext(RequestSpecificationImpl.groovy:1153)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:93)
+at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1213)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1022)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:810)
+at io.restassured.internal.RequestSpecificationImpl.invokeMethod(RequestSpecificationImpl.groovy)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:48)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.callCurrent(PogoInterceptableSite.java:58)
+at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:52)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:154)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:182)
+at io.restassured.internal.RequestSpecificationImpl.applyPathParamsAndSendRequest(RequestSpecificationImpl.groovy:1730)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:93)
+at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1213)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1022)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:810)
+at io.restassured.internal.RequestSpecificationImpl.invokeMethod(RequestSpecificationImpl.groovy)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:48)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.callCurrent(PogoInterceptableSite.java:58)
+at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:52)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:154)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:182)
+at io.restassured.internal.RequestSpecificationImpl.applyPathParamsAndSendRequest(RequestSpecificationImpl.groovy:1738)
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.lang.reflect.Method.invoke(Method.java:498)
+at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:93)
+at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:325)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1213)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1022)
+at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:810)
+at io.restassured.internal.RequestSpecificationImpl.invokeMethod(RequestSpecificationImpl.groovy)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:48)
+at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.callCurrent(PogoInterceptableSite.java:58)
+at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:52)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:154)
+at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:182)
+at io.restassured.internal.RequestSpecificationImpl.get(RequestSpecificationImpl.groovy:170)
+at io.restassured.internal.RequestSpecificationImpl.get(RequestSpecificationImpl.groovy)
+at io.restassured.RestAssured.get(RestAssured.java:778)
+at driver.ActionClass.RealtimeEventGetAPi(ActionClass.java:884)
+at driver.DriverEngine.mainMethod(DriverEngine.java:290)
+at regressionTests.RegressionCases.VerifyWithAPICalls(RegressionCases.java:60)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
@@ -46,11 +147,11 @@ at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:251)
 at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
 ]]>
             </full-stacktrace>
-          </exception> <!-- java.lang.IllegalArgumentException -->
+          </exception> <!-- java.net.MalformedURLException -->
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- DefineBrainTests -->
+        </test-method> <!-- VerifyWithAPICalls -->
       </class> <!-- regressionTests.RegressionCases -->
-    </test> <!-- Test -->
-  </suite> <!-- Suite -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
 </testng-results>

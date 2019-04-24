@@ -12,6 +12,7 @@ import java.util.Set;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -151,12 +152,40 @@ public class GeneralUtilities extends ActionClass {
 		CSVReader csvReader = new CSVReader(new FileReader(file));
 
 		String[] header = csvReader.readNext();
+		try {
+			csvReader.close();
+
+		} catch (Exception e) {
+
+			System.out.println("reader didnt close");
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Thread.sleep(10000);
 
 		if (header != null) {
 			CsvColumnCount = header.length;
 		}
 
 		return CsvColumnCount;
+	}
+
+	// Below method copy the file from the source directory to destination directory
+	public boolean CopyFile(File src, File dest) {
+		boolean flag = false;
+		try {
+
+			FileUtils.moveFileToDirectory(src, dest, false);
+			flag = true;
+			// src.renameTo(dest);
+		} catch (Exception e) {
+			flag = false;
+			System.out.println("File move failed");
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return flag;
 	}
 
 }
