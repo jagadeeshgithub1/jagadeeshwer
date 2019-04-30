@@ -5,8 +5,10 @@
     <classes>
       <class name="regressionTests.RegressionCases">
         <methods>
+          <include name="Verify_DownloadedCSV_For_New_version"/>
           <include name="setUp"/>
-          <include name="VerifyWithAPICalls"/>
+          <include name="Verify_DownloadedCSV_For_Existing_Version"/>
+          <include name="Verify_RealTimeEvent_API_Response_For_NewEvent"/>
         </methods>
       </class> <!-- regressionTests.RegressionCases -->
     </classes>

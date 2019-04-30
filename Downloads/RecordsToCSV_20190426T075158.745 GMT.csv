@@ -1,0 +1,3 @@
+pyLabel,pyName,pyGroup,pyIssue,Intent,ApplicableChannel,MaxTreatments
+Decision Mix For Email,Email-All,,,All,Email,1
+Decision Mix For SMS,SMS-All,,,All,SMS,1

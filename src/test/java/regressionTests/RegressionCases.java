@@ -42,9 +42,9 @@ public class RegressionCases {
 
 	@Test(priority = 1)
 	// First test to validate the CSV after engine run
-	public void VerifyDownloadedCSV() {
+	public void Verify_DownloadedCSV_For_Existing_Version() {
 
-		if (!driverEngine.mainMethod("Cases_CSVvalidations")) {
+		if (!driverEngine.mainMethod("VerifyCSVForExistingVersion")) {
 			fail();
 			Reporter.log("failed to find test sheet");
 		}
@@ -54,10 +54,10 @@ public class RegressionCases {
 	}
 
 	@Test(priority = 2)
-	// Second suite to with API integration
-	public void VerifyWithAPICalls() {
+	// Second case to verify the event API integration
+	public void Verify_DownloadedCSV_For_New_version() {
 
-		if (!driverEngine.mainMethod("Cases_APIIntegration")) {
+		if (!driverEngine.mainMethod("VerifyCSVForNewVersion")) {
 
 			// TODO Auto-generated catch block
 			fail();
@@ -65,4 +65,27 @@ public class RegressionCases {
 		}
 
 	}
+
+	@Test(priority = 3)
+	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
+		if (!driverEngine.mainMethod("VerifyEventAPI")) {
+
+			// TODO Auto-generated catch block
+			fail();
+			Reporter.log("failed to find the testsheet");
+		}
+
+	}
+
+	@Test(priority = 4)
+	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
+		if (!driverEngine.mainMethod("VerifyDeleteOffer")) {
+
+			// TODO Auto-generated catch block
+			fail();
+			Reporter.log("failed to find the testsheet");
+		}
+
+	}
+
 }

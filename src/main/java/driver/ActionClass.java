@@ -14,10 +14,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -28,6 +30,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Reporter;
 
 import com.opencsv.CSVReader;
 
@@ -72,8 +75,6 @@ public class ActionClass extends TestBaseClass {
 		 * password from properties file
 		 * 
 		 * 
-		 * 
-		 * 
 		 */
 		boolean flag = false;
 
@@ -91,6 +92,79 @@ public class ActionClass extends TestBaseClass {
 	}
 
 	public boolean click(String object) {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 *
+		 * 
+		 * @date :3/19/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to clik on any web element
+		 * 
+		 * @Parameters:Passing the xpath locator from the properties file
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		try {
+
+			boolean ele = new WebDriverWait(driver, 30).until(ExpectedConditions.and(
+					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
+					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
+			if (ele == true) {
+
+				WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
+
+				Actions action = new Actions(driver);
+				System.out.println("is this the element???>>" + element);
+				action.moveToElement(element).click(element).build().perform();
+				Thread.sleep(5000);
+				// action.moveToElement(element).sendKeys(Keys.RETURN);
+				// driver.findElement(By.xpath(prop.getProperty(object))).click();
+
+				flag = true;
+			} else {
+				System.out.println("run engine is not clicked..");
+				flag = false;
+			}
+
+		} catch (TimeoutException e) {
+
+			System.out.println("Are you sure the element is present");
+			flag = false;
+			// TODO: handle exception
+		} catch (Exception e) {
+			System.out.println("element is not present");
+			flag = false;
+			// TODO: handle exception
+		}
+
+		// driver.findElement(By.xpath(prop.getProperty(object))).click();
+
+		// using action class
+		/*
+		 * WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
+		 * Actions action = new Actions(driver);
+		 * action.moveToElement(element).click().perform();
+		 */
+
+		/*
+		 * using javascript execurtor WebElement element=
+		 * driver.findElement(By.xpath(prop.getProperty(object)));
+		 * 
+		 * JavascriptExecutor executor = (JavascriptExecutor) driver;
+		 * executor.executeScript("arguments[0].click();", element);
+		 */
+
+		// TODO: handle exception
+		return flag;
+	}
+
+	public boolean RunOrResumeEngineclick(String object) {
 		/*
 		 * @author :Deepa Panikkaveetil
 		 *
@@ -164,6 +238,22 @@ public class ActionClass extends TestBaseClass {
 	}
 
 	public boolean ToggleButtonClick(String object) {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 * 
+		 * @date :3/19/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :used for clicking the toggleButton
+		 * 
+		 * @Parameters:Passing the xpath locator from the properties file
+		 * 
+		 * 
+		 * 
+		 */
 
 		boolean flag = false;
 		try {
@@ -192,16 +282,16 @@ public class ActionClass extends TestBaseClass {
 		 * 
 		 * @modified date:
 		 * 
-		 * @USEFOR :The method is to clik on any web element inside a frame, separated
-		 * from the click method , because the 'switch to frame' is doing inside this
-		 * method
+		 * @USEFOR :The method is to clik on any web element after switching back to
+		 * default frame inside a frame, separated from the click method , because the
+		 * 'switch to frame' is doing inside this method
 		 * 
 		 * @Parameters:Passing the xpath locator from the properties file
 		 * 
 		 * 
 		 * 
 		 */
-		driver.switchTo().frame(1);
+		driver.switchTo().parentFrame();
 		// Object ele=object;
 		try {
 			new WebDriverWait(driver, 300)
@@ -274,8 +364,14 @@ public class ActionClass extends TestBaseClass {
 
 		// below code switch to the frame
 
-		driver.switchTo().frame(1);
-
+		try {
+			// driver.switchTo().frame("PegaGadget2Ifr");
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return flag;
+		}
+		// driver.switchTo().frame("PegaGadget3Ifr");
 		WebElement btnRollbackTab = null;
 
 		// code to identify the tab with the version id
@@ -375,7 +471,7 @@ public class ActionClass extends TestBaseClass {
 		return flag;
 	}
 
-	public boolean closeBrowser() {
+	public boolean quitBrowser() {
 
 		boolean flag = false;
 
@@ -383,6 +479,36 @@ public class ActionClass extends TestBaseClass {
 		 * @author:Deepa Panikkaeetil
 		 * 
 		 * @date:3/20/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for quiting the browser
+		 * 
+		 * @Parameter:NA
+		 * 
+		 * 
+		 * 
+		 */
+		try {
+			driver.quit();
+			flag = true;
+		} catch (Exception e) {
+			flag = false;
+			// TODO: handle exception
+		}
+		return flag;
+	}
+
+	public boolean closeBrowser() {
+
+		boolean flag = false;
+
+		/*
+		 * @author:Deepa Panikkaeetil
+		 * 
+		 * @date:4/25/2019
 		 * 
 		 * @modified by:
 		 * 
@@ -396,7 +522,7 @@ public class ActionClass extends TestBaseClass {
 		 * 
 		 */
 		try {
-			driver.quit();
+			driver.close();
 			flag = true;
 		} catch (Exception e) {
 			flag = false;
@@ -526,6 +652,19 @@ public class ActionClass extends TestBaseClass {
 	}
 
 	public boolean checkboxSelect(String object) {
+		/*
+		 * @author:Deepa Panikkaveetil
+		 * 
+		 * @date:4/05/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for unchecking the check boxes
+		 * 
+		 * @Parameter:Passing the xpath of the web elements
+		 */
 		boolean flag = false;
 
 		WebElement chkBox = null;
@@ -547,6 +686,19 @@ public class ActionClass extends TestBaseClass {
 	}
 
 	public boolean checkboxUncheck(String object) {
+		/*
+		 * @author:Deepa Panikkaveetil
+		 * 
+		 * @date:4/05/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for unchecking the check boxes
+		 * 
+		 * @Parameter:Passing the xpath of the web elements
+		 */
 		boolean flag = false;
 
 		WebElement chkBox = null;
@@ -568,9 +720,59 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
+	public boolean selectRadioButton(String object) {
+		/*
+		 * @author:Deepa Panikkaveetil
+		 * 
+		 * @date:4/05/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for unchecking the check boxes
+		 * 
+		 * @Parameter:Passing the xpath of the web elements
+		 */
+
+		WebElement ele;
+		boolean flag = false;
+		try {
+			ele = new WebDriverWait(driver, 50)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return false;
+		}
+
+		if (ele != null) {
+			if (!ele.isSelected()) {
+
+				ele.click();
+				flag = true;
+
+			}
+		}
+		return flag;
+	}
+
 	// Below code dynamically creates the xpath for the trigger check box during the
 	// event creation
 	public boolean checkTriggerEvent(String titleOftheEvent) {
+		/*
+		 * @author:Deepa Panikkaveetil
+		 * 
+		 * @date:4/05/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for unchecking the check boxes
+		 * 
+		 * @Parameter:Passing the xpath of the web elements
+		 */
 		boolean flag = false;
 		WebElement chkTrigger = null;
 		try {
@@ -593,6 +795,19 @@ public class ActionClass extends TestBaseClass {
 	}
 
 	public boolean keyPressEnter(String object) {
+		/*
+		 * @author:Deepa Panikkaveetil
+		 * 
+		 * @date:4/05/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for keyPressEnter
+		 * 
+		 * @Parameter:Passing the xpath of the web elements
+		 */
 		boolean flag = false;
 		try {
 			driver.findElement(By.xpath(prop.getProperty(object))).sendKeys(Keys.ENTER);
@@ -608,6 +823,21 @@ public class ActionClass extends TestBaseClass {
 	}
 
 	public boolean byPassArbitrationSelection(String offerName, String eventName) {
+
+		/*
+		 * @author:Deepa Panikkaveetil
+		 * 
+		 * @date:4/05/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USED_FOR:Method used for keyPressEnter
+		 * 
+		 * @Parameter:Passing the xpath of the web elements
+		 */
+
 		boolean flag = false;
 
 		// below code locate the toggle button for arbitration
@@ -856,10 +1086,10 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
-	public boolean RealtimeEventGetAPi(String partyID, String eventName) {
+	public boolean RealtimeEventGetAPi(int partyID, String eventName) {
 
 		/*
-		 * @author:Jagaish Reddy
+		 * @author:Jagadish Reddy
 		 * 
 		 * @date:4/23/2019
 		 * 
@@ -874,10 +1104,18 @@ public class ActionClass extends TestBaseClass {
 
 		boolean flag = false;
 		// String URL = null;
+
+		String PartyID = Integer.toString(partyID);
+		// String PartyID = "123461";
+		// String eventName1 = "regression_event";
+
 		RestAssured.authentication = RestAssured.preemptive().basic(prop.getProperty("apiUser"),
 				prop.getProperty("apiPasswd"));
 
-		String URL = prop.getProperty("eventAPIURL") + partyID.trim() + "&context=event=" + eventName;
+		String URL = prop.getProperty("eventAPIURL") + PartyID + "&context=event=" + eventName;
+
+		// String URL
+		// ="http://auto-test-mavis74.adqura.com:80/prweb/PRRestService/AdquraNBAServices/1/triggerevent?partyid="+PartyID+"&context=event="+Event_name;
 
 		RestAssured.baseURI = URL;
 
@@ -891,7 +1129,7 @@ public class ActionClass extends TestBaseClass {
 			System.out.println(Data_reponse);
 			ResponseBody body = response.getBody();
 			String responseBody = body.asString();
-			JsonPath jsonPathEvaluator1 = response.jsonPath();
+			// JsonPath jsonPathEvaluator1 = response.jsonPath();
 			if (jsonPathEvaluator.get("Message") == null) {
 				System.out.println(
 						"Trigger event sucess with Message with  IsFailed is " + jsonPathEvaluator.get("IsFailed"));
@@ -899,9 +1137,12 @@ public class ActionClass extends TestBaseClass {
 			}
 
 			else {
+				flag = false;
 
 				System.out.println(
 						"Trigger event Fail with  Message with IsFailed is " + jsonPathEvaluator.get("IsFailed"));
+				Reporter.log("Response has message" + responseBody);
+				return flag;
 
 			}
 			flag = true;
@@ -913,6 +1154,248 @@ public class ActionClass extends TestBaseClass {
 		}
 		return flag;
 
+	}
+
+	public boolean switchToFrame(String frameID) {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 * 
+		 * @date :4/25/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to switch to the frame if the element is in different
+		 * frame
+		 * 
+		 * @Parameters:Passing the frameId/name
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		try {
+			driver.switchTo().frame(frameID);
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return flag;
+		}
+
+		return flag;
+	}
+
+	public boolean switchToChildFrame(String mainFrame, String childFrame) {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 * 
+		 * @date :4/26/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to switch to the frame if the element is in different
+		 * frame
+		 * 
+		 * @Parameters:Passing the frameId/name
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		try {
+			driver.switchTo().frame("childFrame.0.mainFrame");
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return flag;
+		}
+
+		return flag;
+	}
+
+	public boolean switchToParent() {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 * 
+		 * @date :4/26/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to switch to the frame if the element is in different
+		 * frame
+		 * 
+		 * @Parameters:Passing the frameId/name
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		try {
+			driver.switchTo().defaultContent();
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return flag;
+		}
+
+		return flag;
+	}
+
+	public boolean switchToNewWindow(int windowNumber) {
+
+		/*
+		 * @author :Deepa Panikkaveetil
+		 * 
+		 * @date :4/25/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to switch to the new window
+		 * 
+		 * @Parameters:Passing the window number 1,2,3....
+		 * 
+		 * 
+		 * 
+		 */
+
+		boolean flag = false;
+
+		try {
+			Set<String> s = driver.getWindowHandles();
+			Iterator<String> ite = s.iterator();
+			int i = 1;
+			while (ite.hasNext() && i < 10) {
+				String popupHandle = ite.next().toString();
+				driver.switchTo().window(popupHandle);
+				System.out.println("Window title is : " + driver.getTitle());
+				if (i == windowNumber)
+					break;
+				i++;
+			}
+			flag = true;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return flag;
+		}
+		return flag;
+	}
+
+	public boolean mouseOver(String object) {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 * 
+		 * @date :4/26/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to perform the mouseover on element
+		 * 
+		 * @Parameters:Passing the window the element locator
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		Actions actions = new Actions(driver);
+
+		WebElement ele;
+		try {
+			ele = new WebDriverWait(driver, 50)
+					.until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return false;
+		}
+
+		if (ele != null) {
+			actions.moveToElement(ele).build().perform();
+			flag = true;
+
+		}
+		return flag;
+	}
+
+	public boolean maximizeWindow() {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 * 
+		 * @date :4/26/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to maximize the window
+		 * 
+		 * @Parameters:NA
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		try {
+			driver.manage().window().maximize();
+			flag = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			flag = false;
+			return flag;
+		}
+		return flag;
+	}
+
+	public boolean hiddenClick(String TestData) {
+		/*
+		 * @author :jagadeesh
+		 * 
+		 * @date :4/26/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to perform the click on hidden element
+		 * 
+		 * @Parameters:Passing the object the element locator
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		Actions actions = new Actions(driver);
+
+		WebElement ele;
+		try {
+			String xpathfor_delete = "//li[@title=\'" + TestData + "\']//span[@title=\"Edit/Delete Offer\"]";
+
+			WebElement element = driver.findElement(By.xpath(xpathfor_delete));
+			System.out.println("Hidden element find and it is " + element);
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			js.executeScript("arguments[0].click();", element);
+			flag = true;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("unable to click due to" + e);
+			flag = false;
+
+		}
+
+		return flag;
 	}
 
 }

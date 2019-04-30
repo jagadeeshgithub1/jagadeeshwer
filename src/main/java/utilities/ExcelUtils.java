@@ -196,7 +196,7 @@ public class ExcelUtils {
 	public int getTestStepsCount(String SheetName, String sTestCaseID, int iTestCaseStart, String columnName)
 			throws Exception {
 		int TestCount = 0;
-		for (int i = iTestCaseStart; i < getRowCount(SheetName); i++) {
+		for (int i = iTestCaseStart; i <= getRowCount(SheetName); i++) {
 			if (!sTestCaseID.equals(getCellData(SheetName, i, columnName))) {
 				TestCount = i - 1;
 				// TestCount = i;
@@ -206,10 +206,10 @@ public class ExcelUtils {
 
 		/// ExcelWSheet = ExcelWBook.getSheet(SheetName);
 
-		sh = wbk.getSheet(SheetName);
+		// sh = wbk.getSheet(SheetName);
 
-		TestCount = sh.getLastRowNum();
-
+		// TestCount = sh.getLastRowNum();
+		TestCount = getRowCount(SheetName);
 		return TestCount;
 	}
 

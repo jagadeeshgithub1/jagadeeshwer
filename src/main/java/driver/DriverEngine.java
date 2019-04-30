@@ -20,8 +20,7 @@ public class DriverEngine extends TestBaseClass {
 	public static String PageObject = null;
 	public static String TestData = null;
 	static ActionClass classAction = null;
-	// public ExcelUtils excelUtils=new
-	// ExcelUtils("TestDataAndResults\\SophieAutomation.xlsx");
+	public ExcelUtils excelUtils;
 
 	public DriverEngine() throws Exception {
 
@@ -36,7 +35,7 @@ public class DriverEngine extends TestBaseClass {
 	 */
 	public boolean mainMethod(String sheetName) {
 
-		boolean flag = true;
+		boolean Finalflag = true;
 
 		int iEnd = 0;
 		int iStart = 0;
@@ -64,9 +63,9 @@ public class DriverEngine extends TestBaseClass {
 		try {
 			excelUtils = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
 		} catch (Exception e) {
-			flag = false;
+			Finalflag = false;
 			System.err.println("issue with test data sheet ");
-			return false;
+			return Finalflag;
 			// TODO Auto-generated catch block
 			// e.printStackTrace();
 		}
@@ -102,6 +101,8 @@ public class DriverEngine extends TestBaseClass {
 
 					System.out.println("Test start is not getting>>");
 					e.printStackTrace();
+					Finalflag = false;
+					return Finalflag;
 				}
 
 				try {
@@ -111,6 +112,8 @@ public class DriverEngine extends TestBaseClass {
 					System.out.println("Test end is not getting>>");
 					// TODO Auto-generated catch block //
 					excelUtils.setCellData("DriverSheet", "Results", IdriverRow, "Fail");
+					Finalflag = false;
+					return Finalflag;
 				}
 
 				// for (int Irow = 4; Irow <= excelUtils.getRowCount(sheetName); Irow++) {
@@ -124,6 +127,8 @@ public class DriverEngine extends TestBaseClass {
 					} catch (Exception e1) {
 						// TODO Auto-generated catch block
 						System.err.println("failed to instanciate the action class");
+						Finalflag = false;
+						return Finalflag;
 					}
 					System.out.println("data sheet reading >>" + Irow);
 					ActionKeyWord = excelUtils.getCellData(sheetName, Irow, "ActionKeyword");
@@ -159,6 +164,20 @@ public class DriverEngine extends TestBaseClass {
 						break;
 					case "click":
 						if (classAction.click(PageObject)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						} else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "RunOrResumeEngineclick":
+						if (classAction.RunOrResumeEngineclick(PageObject)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						} else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+						break;
+					case "mouseOver":
+						if (classAction.mouseOver(PageObject)) {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
@@ -287,13 +306,55 @@ public class DriverEngine extends TestBaseClass {
 
 						break;
 					case "RealtimeEventGetAPi":
-						if (classAction.RealtimeEventGetAPi(TestData, Argument1)) {
+						if (classAction.RealtimeEventGetAPi(((int) (Float.parseFloat(TestData))), Argument1)) {
 
 							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
 
 						} else {
 							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
 						}
+
+						break;
+					case "switchToParent":
+						if (classAction.switchToParent()) {
+
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+
+						} else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+
+						break;
+					case "switchToFrame":
+						if (classAction.switchToFrame(TestData)) {
+
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+
+						} else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+
+						break;
+					case "switchToNewWindow":
+						if (classAction.switchToNewWindow((int) Float.parseFloat(TestData))) {
+
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+
+						} else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+
+						break;
+					case "quitBrowser":
+						if (classAction.quitBrowser()) {
+
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+
+						} else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+
+						// excelUtils.saveFile("TestDataAndResults\\SophieAutomationResults.xlsx");
 
 						break;
 					case "closeBrowser":
@@ -308,6 +369,27 @@ public class DriverEngine extends TestBaseClass {
 						// excelUtils.saveFile("TestDataAndResults\\SophieAutomationResults.xlsx");
 
 						break;
+					case "maximizeWindow":
+						if (classAction.maximizeWindow()) {
+
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+
+						} else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+
+						// excelUtils.saveFile("TestDataAndResults\\SophieAutomationResults.xlsx");
+
+						break;
+					case "hidden_click":
+						if (classAction.hiddenClick(TestData)) {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Pass");
+						}
+
+						else {
+							excelUtils.setCellData(sheetName, "Results", Irow, "Fail");
+						}
+
 					default:
 						break;
 					}
@@ -317,7 +399,26 @@ public class DriverEngine extends TestBaseClass {
 			}
 		}
 
-		return flag;
+		Finalflag = finalResult(sheetName);
+		return Finalflag;
+
+	}
+
+	public boolean finalResult(String sheetName) {
+
+		boolean finalResult = true;
+
+		for (int i = 4; i <= excelUtils.getRowCount(sheetName); i++) {
+
+			String Result = excelUtils.getCellData(sheetName, i, "Results");
+			if (Result.equalsIgnoreCase("Fail") || Result.isEmpty()) {
+				finalResult = false;
+				return finalResult;
+
+			}
+
+		}
+		return finalResult;
 
 	}
 
