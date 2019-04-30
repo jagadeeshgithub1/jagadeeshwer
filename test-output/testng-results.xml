@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testng-results skipped="0" failed="4" ignored="0" total="4" passed="0">
   <reporter-output>
+    <line>
+      <![CDATA[Response has message{"Message":"NoOffer","IsFailed":false}]]>
+    </line>
   </reporter-output>
-  <suite name="Default suite" duration-ms="796267" started-at="2019-04-30T08:26:00Z" finished-at="2019-04-30T08:39:16Z">
+  <suite name="Default suite" duration-ms="947387" started-at="2019-04-30T13:32:58Z" finished-at="2019-04-30T13:48:45Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="796267" started-at="2019-04-30T08:26:00Z" finished-at="2019-04-30T08:39:16Z">
+    <test name="Default test" duration-ms="947387" started-at="2019-04-30T13:32:58Z" finished-at="2019-04-30T13:48:45Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@28ac3dc3]" name="setUp" is-config="true" duration-ms="63" started-at="2019-04-30T08:26:00Z" finished-at="2019-04-30T08:26:00Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@28ac3dc3]" name="setUp" is-config="true" duration-ms="63" started-at="2019-04-30T13:32:58Z" finished-at="2019-04-30T13:32:58Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@28ac3dc3]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="274119" started-at="2019-04-30T08:26:00Z" finished-at="2019-04-30T08:30:34Z">
+        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@28ac3dc3]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="1243" started-at="2019-04-30T13:32:58Z" finished-at="2019-04-30T13:32:59Z">
           <exception class="java.lang.NullPointerException">
             <full-stacktrace>
               <![CDATA[java.lang.NullPointerException
-at driver.ActionClass.checkboxSelect(ActionClass.java:680)
-at driver.DriverEngine.mainMethod(DriverEngine.java:216)
+at driver.DriverEngine.finalResult(DriverEngine.java:411)
+at driver.DriverEngine.mainMethod(DriverEngine.java:402)
 at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:47)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -49,12 +52,12 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Verify_DownloadedCSV_For_Existing_Version -->
-        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_New_version()[pri:2, instance:regressionTests.RegressionCases@28ac3dc3]" name="Verify_DownloadedCSV_For_New_version" duration-ms="242482" started-at="2019-04-30T08:30:34Z" finished-at="2019-04-30T08:34:37Z">
+        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_New_version()[pri:2, instance:regressionTests.RegressionCases@28ac3dc3]" name="Verify_DownloadedCSV_For_New_version" duration-ms="218" started-at="2019-04-30T13:32:59Z" finished-at="2019-04-30T13:33:00Z">
           <exception class="java.lang.NullPointerException">
             <full-stacktrace>
               <![CDATA[java.lang.NullPointerException
-at driver.ActionClass.checkboxSelect(ActionClass.java:680)
-at driver.DriverEngine.mainMethod(DriverEngine.java:216)
+at driver.DriverEngine.finalResult(DriverEngine.java:411)
+at driver.DriverEngine.mainMethod(DriverEngine.java:402)
 at regressionTests.RegressionCases.Verify_DownloadedCSV_For_New_version(RegressionCases.java:60)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -87,12 +90,12 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Verify_DownloadedCSV_For_New_version -->
-        <test-method status="FAIL" signature="Verify_RealTimeEvent_API_Response_For_NewEvent()[pri:3, instance:regressionTests.RegressionCases@28ac3dc3]" name="Verify_RealTimeEvent_API_Response_For_NewEvent" duration-ms="279371" started-at="2019-04-30T08:34:37Z" finished-at="2019-04-30T08:39:16Z">
+        <test-method status="FAIL" signature="Verify_RealTimeEvent_API_Response_For_NewEvent()[pri:3, instance:regressionTests.RegressionCases@28ac3dc3]" name="Verify_RealTimeEvent_API_Response_For_NewEvent" duration-ms="699264" started-at="2019-04-30T13:33:00Z" finished-at="2019-04-30T13:44:39Z">
           <exception class="java.lang.NullPointerException">
             <full-stacktrace>
               <![CDATA[java.lang.NullPointerException
-at driver.ActionClass.checkboxSelect(ActionClass.java:680)
-at driver.DriverEngine.mainMethod(DriverEngine.java:216)
+at driver.DriverEngine.finalResult(DriverEngine.java:411)
+at driver.DriverEngine.mainMethod(DriverEngine.java:402)
 at regressionTests.RegressionCases.Verify_RealTimeEvent_API_Response_For_NewEvent(RegressionCases.java:71)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -123,14 +126,17 @@ at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:77)
             </full-stacktrace>
           </exception> <!-- java.lang.NullPointerException -->
           <reporter-output>
+            <line>
+              <![CDATA[Response has message{"Message":"NoOffer","IsFailed":false}]]>
+            </line>
           </reporter-output>
         </test-method> <!-- Verify_RealTimeEvent_API_Response_For_NewEvent -->
-        <test-method status="FAIL" signature="Verify_Deleted_Offer_Is_Not_Present_In_CSV()[pri:4, instance:regressionTests.RegressionCases@28ac3dc3]" name="Verify_Deleted_Offer_Is_Not_Present_In_CSV" duration-ms="147" started-at="2019-04-30T08:39:16Z" finished-at="2019-04-30T08:39:16Z">
+        <test-method status="FAIL" signature="Verify_Deleted_Offer_Is_Not_Present_In_CSV()[pri:4, instance:regressionTests.RegressionCases@28ac3dc3]" name="Verify_Deleted_Offer_Is_Not_Present_In_CSV" duration-ms="246532" started-at="2019-04-30T13:44:39Z" finished-at="2019-04-30T13:48:45Z">
           <exception class="java.lang.NullPointerException">
             <full-stacktrace>
               <![CDATA[java.lang.NullPointerException
-at driver.DriverEngine.finalResult(DriverEngine.java:411)
-at driver.DriverEngine.mainMethod(DriverEngine.java:402)
+at driver.ActionClass.checkboxSelect(ActionClass.java:680)
+at driver.DriverEngine.mainMethod(DriverEngine.java:216)
 at regressionTests.RegressionCases.Verify_Deleted_Offer_Is_Not_Present_In_CSV(RegressionCases.java:82)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)

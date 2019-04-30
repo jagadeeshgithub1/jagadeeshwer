@@ -20,7 +20,7 @@ public class DriverEngine extends TestBaseClass {
 	public static String PageObject = null;
 	public static String TestData = null;
 	static ActionClass classAction = null;
-	public ExcelUtils excelUtils;
+	public ExcelUtils excelUtils = null;
 
 	public DriverEngine() throws Exception {
 
@@ -58,7 +58,7 @@ public class DriverEngine extends TestBaseClass {
 		 * ExcelUtils("TestDataAndResults\\SophieAutomation.xlsx"); } catch (Exception
 		 * e) { // TODO Auto-generated catch block e.printStackTrace(); }
 		 */
-		ExcelUtils excelUtils = null;
+		// ExcelUtils excelUtils = null;
 
 		try {
 			excelUtils = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
@@ -407,11 +407,14 @@ public class DriverEngine extends TestBaseClass {
 	public boolean finalResult(String sheetName) {
 
 		boolean finalResult = true;
+		String Result = null;
 
 		for (int i = 4; i <= excelUtils.getRowCount(sheetName); i++) {
 
-			String Result = excelUtils.getCellData(sheetName, i, "Results");
-			if (Result.equalsIgnoreCase("Fail") || Result.isEmpty()) {
+			Result = excelUtils.getCellData(sheetName, i, "Results");
+			System.out.println(Result);
+			if (Result == null || Result == "Fail") {
+
 				finalResult = false;
 				return finalResult;
 

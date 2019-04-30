@@ -1,11 +1,10 @@
 package regressionTests;
 
-import static org.testng.Assert.fail;
-
 import java.io.File;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
+import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -45,7 +44,7 @@ public class RegressionCases {
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
 		if (!driverEngine.mainMethod("VerifyCSVForExistingVersion")) {
-			fail();
+			Assert.assertTrue(false);
 			Reporter.log("failed to find test sheet");
 		}
 
@@ -60,7 +59,8 @@ public class RegressionCases {
 		if (!driverEngine.mainMethod("VerifyCSVForNewVersion")) {
 
 			// TODO Auto-generated catch block
-			fail();
+
+			Assert.assertTrue(false);
 			Reporter.log("failed to find the testsheet");
 		}
 
@@ -71,7 +71,7 @@ public class RegressionCases {
 		if (!driverEngine.mainMethod("VerifyEventAPI")) {
 
 			// TODO Auto-generated catch block
-			fail();
+			Assert.assertTrue(false);
 			Reporter.log("failed to find the testsheet");
 		}
 
@@ -82,7 +82,7 @@ public class RegressionCases {
 		if (!driverEngine.mainMethod("VerifyDeleteOffer")) {
 
 			// TODO Auto-generated catch block
-			fail();
+			Assert.assertTrue(false);
 			Reporter.log("failed to find the testsheet");
 		}
 

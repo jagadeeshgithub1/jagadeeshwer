@@ -16,6 +16,7 @@
   </properties>
 <build>
     <plugins>
+        
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
@@ -23,8 +24,7 @@
             <configuration>
                 <source>1.8</source>
                 <target>1.8</target>
-                <fork>true</fork>
-                <executable>C:\Program Files\Java\jdk1.8.0_201\bin\javac</executable>
+                <fork>true</fork>                               
             </configuration>
         </plugin>
         <plugin>
@@ -139,5 +139,12 @@
 <artifactId>htmlunit-driver</artifactId>
 <version>2.33.2</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.6</version>
+</dependency>
+
   </dependencies>
 </project>
