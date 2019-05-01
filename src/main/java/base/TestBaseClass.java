@@ -17,13 +17,13 @@ public class TestBaseClass {
 		osName = System.getProperty("os.name");
 		osName = osName.trim();
 
-		// ip = new FileInputStream("Properties\\config.properties");// for the windows
-		ip = new FileInputStream("Properties/config.properties");// for linux
-		// if (osName.equalsIgnoreCase("Linux")) {
-		//
-		// ip = new FileInputStream("Properties/config.properties");
-		//
-		// }
+		ip = new FileInputStream("Properties\\config.properties");// for the windows
+		// ip = new FileInputStream("Properties/config.properties");// for linux
+		if (osName.equalsIgnoreCase("Linux")) {
+
+			ip = new FileInputStream("Properties/config.properties");
+
+		}
 
 		prop.load(ip);
 

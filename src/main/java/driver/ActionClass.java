@@ -433,17 +433,15 @@ public class ActionClass extends TestBaseClass {
 		String osName = System.getProperty("os.name").trim();
 		String downloadFilepath = null;
 		try {
-			// System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
-			// downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
-			System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
-			downloadFilepath = System.getProperty("user.dir") + "/Downloads";
-
-			System.out.println("download path " + downloadFilepath);
-
-			// if (osName.equalsIgnoreCase("Linux")) {
-			// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
+			downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
+			// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 			// downloadFilepath = System.getProperty("user.dir") + "/Downloads";
-			// }
+			if (osName.equalsIgnoreCase("Linux")) {
+				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
+				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
+			}
+			System.out.println("download path " + downloadFilepath);
 
 			// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
 
@@ -945,11 +943,10 @@ public class ActionClass extends TestBaseClass {
 		}
 		ExcelUtils ObjTestdataFile = null;
 		try {
-			// ObjTestdataFile = new
-			// ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");// for windows
-			// if (osName.equalsIgnoreCase("Linux")) {
-			ObjTestdataFile = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
-			// }
+			ObjTestdataFile = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");// for windows
+			if (osName.equalsIgnoreCase("Linux")) {
+				ObjTestdataFile = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1058,10 +1055,10 @@ public class ActionClass extends TestBaseClass {
 
 				// here should do the code to move the file to Archive
 				File dest = null;
-				// dest = new File("Downloads\\Archive\\");
-				// if (osName.equalsIgnoreCase("Linux")) {
-				dest = new File("Downloads/Archive/");
-				// }
+				dest = new File("Downloads\\Archive\\");
+				if (osName.equalsIgnoreCase("Linux")) {
+					dest = new File("Downloads/Archive/");
+				}
 
 				if (generalUtilities.CopyFile(file, dest)) {
 					System.out.println("File moved to archive");
