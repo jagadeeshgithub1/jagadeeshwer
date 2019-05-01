@@ -77,7 +77,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 2)
+	@Test(priority = 2, enabled = false)
 	// Second case to verify the event API integration
 	public void Verify_DownloadedCSV_For_New_version() {
 
@@ -91,7 +91,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 3, enabled = false)
 	public void Verify_RealTimeEvent_API_Response_For_NewEvent() {
 		if (!driverEngine.mainMethod("VerifyEventAPI")) {
 
@@ -102,7 +102,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 4, enabled = false)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		if (!driverEngine.mainMethod("VerifyDeleteOffer")) {
 
