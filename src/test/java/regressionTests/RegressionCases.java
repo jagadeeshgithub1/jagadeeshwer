@@ -29,7 +29,7 @@ public class RegressionCases {
 		srcFile = new File("TestDataAndResults\\TestData\\SophieAutomation.xlsx");
 		destDir = new File("TestDataAndResults\\Run1\\");
 
-		if (osName == "Linux") {
+		if (osName.indexOf("Linux") >= 0) {
 			try {
 				srcFile = new File("TestDataAndResults/TestData/SophieAutomation.xlsx");
 				destDir = new File("TestDataAndResults/Run1/");
