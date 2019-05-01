@@ -48,6 +48,8 @@ public class RegressionCases {
 		try {
 			driverEngine = new DriverEngine();
 		} catch (Exception e1) {
+
+			e1.printStackTrace();
 			// TODO Auto-generated catch block
 			System.out.println("failed to instantiate the driver class");
 		}
