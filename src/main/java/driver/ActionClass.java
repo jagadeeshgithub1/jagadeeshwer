@@ -447,11 +447,18 @@ public class ActionClass extends TestBaseClass {
 		 */
 		// initialization();
 		boolean flag = false;
+		String osName = System.getProperty("os.name").trim();
+		String downloadFilepath = null;
 		try {
 			System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
+			downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
+			if (osName.equalsIgnoreCase("Linux")) {
+				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
+				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
+			}
 
 			// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
-			String downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
+
 			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 			chromePrefs.put("profile.default_content_settings.popups", 0);
 			chromePrefs.put("download.default_directory", downloadFilepath);
@@ -941,6 +948,7 @@ public class ActionClass extends TestBaseClass {
 		String ColumnToBeValidated = null;
 		String ValueToBeChecked = null;
 		String ExpectedResult = null;
+		String osName = System.getProperty("os.name").trim();
 		try {
 			generalUtilities = new GeneralUtilities();
 		} catch (Exception e) {
@@ -950,6 +958,9 @@ public class ActionClass extends TestBaseClass {
 		ExcelUtils ObjTestdataFile = null;
 		try {
 			ObjTestdataFile = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
+			if (osName.equalsIgnoreCase("Linux")) {
+				ObjTestdataFile = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1057,8 +1068,11 @@ public class ActionClass extends TestBaseClass {
 			try {
 
 				// here should do the code to move the file to Archive
-
-				File dest = new File("Downloads\\Archive\\");
+				File dest = null;
+				dest = new File("Downloads\\Archive\\");
+				if (osName.equalsIgnoreCase("Linux")) {
+					dest = new File("Downloads/Archive/");
+				}
 
 				if (generalUtilities.CopyFile(file, dest)) {
 					System.out.println("File moved to archive");
