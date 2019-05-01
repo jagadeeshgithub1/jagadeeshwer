@@ -124,6 +124,8 @@ public class ExcelUtils {
 				if (row.getCell(i).getStringCellValue().trim().equals(colName))
 					colNum = i;
 			}
+
+			System.out.println("Column number :" + colNum + "row number: " + rowNum);
 			if (colNum == -1)
 				return false;
 
