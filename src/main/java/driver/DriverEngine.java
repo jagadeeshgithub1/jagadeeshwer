@@ -62,21 +62,33 @@ public class DriverEngine extends TestBaseClass {
 		// ExcelUtils excelUtils = null;
 
 		osName = System.getProperty("os.name").trim();
+		if (osName.equalsIgnoreCase("Linux")) {
+			try {
+				excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
+			} catch (Exception e) {
+				System.out.println("File didnt find in linux machine");
+				Finalflag = false;
 
-		try {
-			// excelUtils = new
-			excelUtils = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");// for windows
-			if (osName.equalsIgnoreCase("Linux")) {
-				excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx"); // for linux
+				return Finalflag;
 			}
-
-		} catch (Exception e) {
-			Finalflag = false;
-			System.err.println("issue with test data sheet ");
-			return Finalflag;
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
 		}
+
+		else
+
+		{
+			// excelUtils = new
+			try {
+				excelUtils = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				Finalflag = false;
+				System.out.println("File didnt find in windows machine");
+				return Finalflag;
+			} // for windows
+		}
+
+		// TODO Auto-generated catch block
+		// e.printStackTrace();
 
 		// iTotalCases = excelUtils.getTotalScenarios("DriverSheet", 4, "TestCaseID");
 		// iTotalCases = excelUtils.getRowCount("DriverSheet");
