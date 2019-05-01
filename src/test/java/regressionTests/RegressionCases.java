@@ -30,8 +30,14 @@ public class RegressionCases {
 		destDir = new File("TestDataAndResults\\Run1\\");
 
 		if (osName == "Linux") {
-			srcFile = new File("TestDataAndResults/TestData/SophieAutomation.xlsx");
-			destDir = new File("TestDataAndResults/Run1/");
+			try {
+				srcFile = new File("TestDataAndResults/TestData/SophieAutomation.xlsx");
+				destDir = new File("TestDataAndResults/Run1/");
+				System.out.println("path found");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Path not found" + srcFile + destDir);
+			}
 
 		}
 
