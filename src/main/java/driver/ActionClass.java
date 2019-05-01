@@ -435,7 +435,7 @@ public class ActionClass extends TestBaseClass {
 		try {
 			// System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
 			// downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
-			System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 			downloadFilepath = System.getProperty("user.dir") + "/Downloads";
 
 			System.out.println("download path " + downloadFilepath);
