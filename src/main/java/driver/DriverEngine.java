@@ -61,14 +61,14 @@ public class DriverEngine extends TestBaseClass {
 		 */
 		// ExcelUtils excelUtils = null;
 
-		osName = System.getProperty("os.name");
+		osName = System.getProperty("os.name").trim();
 
 		try {
 			// excelUtils = new
-			// ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");// for windows
-			// if (osName == "Linux") {
-			excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx"); // for linux
-			// }
+			excelUtils = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");// for windows
+			if (osName.equalsIgnoreCase("Linux")) {
+				excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx"); // for linux
+			}
 
 		} catch (Exception e) {
 			Finalflag = false;

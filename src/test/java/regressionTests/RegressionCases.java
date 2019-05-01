@@ -20,8 +20,8 @@ public class RegressionCases {
 	@BeforeClass
 	public void setUp() {
 
-		String osName = System.getProperty("os.name");
-		osName = osName.trim();
+		String osName = System.getProperty("os.name").trim();
+		// osName = osName.trim();
 		System.out.println("Machine os:" + osName);
 		File srcFile = null;
 		File destDir = null;
