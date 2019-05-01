@@ -44,6 +44,7 @@ public class DriverEngine extends TestBaseClass {
 		String Argument1 = null;
 		int iTestStart = 0;
 		int iTestEnd = 0;
+		String osName = null;
 
 		// ExcelUtils excelUtils = null;
 
@@ -60,8 +61,14 @@ public class DriverEngine extends TestBaseClass {
 		 */
 		// ExcelUtils excelUtils = null;
 
+		osName = System.getProperty("os.name");
+
 		try {
 			excelUtils = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
+			if (osName == "Linux") {
+				excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
+			}
+
 		} catch (Exception e) {
 			Finalflag = false;
 			System.err.println("issue with test data sheet ");

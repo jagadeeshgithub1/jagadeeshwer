@@ -20,8 +20,21 @@ public class RegressionCases {
 	@BeforeClass
 	public void setUp() {
 
-		File srcFile = new File("TestDataAndResults\\TestData\\SophieAutomation.xlsx");
-		File destDir = new File("TestDataAndResults\\Run1\\");
+		String osName = System.getProperty("os.name");
+
+		System.out.println("Machine os:" + osName);
+		File srcFile = null;
+		File destDir = null;
+
+		srcFile = new File("TestDataAndResults\\TestData\\SophieAutomation.xlsx");
+		destDir = new File("TestDataAndResults\\Run1\\");
+
+		if (osName == "Linux") {
+			srcFile = new File("TestDataAndResults/TestData/SophieAutomation.xlsx");
+			destDir = new File("TestDataAndResults/Run1/");
+
+		}
+
 		try {
 			driverEngine = new DriverEngine();
 		} catch (Exception e1) {

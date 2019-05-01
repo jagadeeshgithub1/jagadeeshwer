@@ -7,12 +7,23 @@ public class TestBaseClass {
 
 	// public static WebDriver driver;
 	public static Properties prop;
+	String osName = null;
+	FileInputStream ip = null;
 
 	public TestBaseClass() throws Exception {
 
 		prop = new Properties();
 
-		FileInputStream ip = new FileInputStream("Properties\\config.properties");
+		osName = System.getProperty("os.name");
+
+		ip = new FileInputStream("Properties\\config.properties");
+
+		if (osName == "Linux") {
+
+			ip = new FileInputStream("Properties/config.properties");
+
+		}
+
 		prop.load(ip);
 
 	}
