@@ -1,4 +1,6 @@
 utilities\ExcelUtils.class
+utilities\ExcelUtilsback.class
+utilities\GeneralUtilities$1.class
 driver\ActionClass.class
 utilities\GeneralUtilities.class
 base\TestBaseClass.class
