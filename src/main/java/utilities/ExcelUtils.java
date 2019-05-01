@@ -132,7 +132,7 @@ public class ExcelUtils {
 			if (colNum == -1)
 				return false;
 
-			sh.autoSizeColumn(colNum);
+			// sh.autoSizeColumn(colNum);
 			row = sh.getRow(rowNum);// changed now from rowNum-1
 			if (row == null)
 				row = sh.createRow(rowNum);
