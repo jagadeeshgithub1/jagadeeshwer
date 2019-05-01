@@ -145,12 +145,5 @@
     <artifactId>commons-io</artifactId>
     <version>2.6</version>
 </dependency>
-
-<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server-standalone -->
-<dependency>
-    <groupId>org.seleniumhq.selenium</groupId>
-    <artifactId>selenium-server-standalone</artifactId>
-    <version>2.53.0</version>
-</dependency>
 </dependencies>
 </project>
