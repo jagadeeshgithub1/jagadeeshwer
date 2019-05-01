@@ -62,30 +62,30 @@ public class DriverEngine extends TestBaseClass {
 		// ExcelUtils excelUtils = null;
 
 		osName = System.getProperty("os.name").trim();
-		if (osName.equalsIgnoreCase("Linux")) {
-			try {
-				excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
-			} catch (Exception e) {
-				System.out.println("File didnt find in linux machine");
-				Finalflag = false;
 
-				return Finalflag;
-			}
+		try {
+			excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
+		} catch (Exception e) {
+			System.out.println("File didnt find in linux machine");
+			Finalflag = false;
+
+			return Finalflag;
 		}
 
-		else
-
-		{
-			// excelUtils = new
-			try {
-				excelUtils = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				Finalflag = false;
-				System.out.println("File didnt find in windows machine");
-				return Finalflag;
-			} // for windows
-		}
+		// else
+		//
+		// {
+		// // excelUtils = new
+		// try {
+		// excelUtils = new
+		// ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// Finalflag = false;
+		// System.out.println("File didnt find in windows machine");
+		// return Finalflag;
+		// } // for windows
+		// }
 
 		// TODO Auto-generated catch block
 		// e.printStackTrace();
