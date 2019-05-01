@@ -20,7 +20,7 @@ public class RegressionCases {
 	@BeforeClass
 	public void setUp() {
 
-		String osName = System.getProperty("os.name");
+		String osName = System.getProperty("os.name").trim();
 
 		System.out.println("Machine os:" + osName);
 		File srcFile = null;
@@ -34,6 +34,9 @@ public class RegressionCases {
 			destDir = new File("TestDataAndResults/Run1/");
 
 		}
+
+		System.out.println("source file:" + srcFile);
+		System.out.println("dest dir:" + destDir);
 
 		try {
 			driverEngine = new DriverEngine();
