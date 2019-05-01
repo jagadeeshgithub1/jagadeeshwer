@@ -7,27 +7,32 @@ public class TestBaseClass {
 
 	// public static WebDriver driver;
 	public static Properties prop;
-	String osName = null;
+	public String osName = null;
 	FileInputStream ip = null;
 
 	public TestBaseClass() throws Exception {
 
 		prop = new Properties();
 
-		osName = System.getProperty("os.name");
-		osName = osName.trim();
+		osName = System.getProperty("os.name").trim();
 
-		ip = new FileInputStream("Properties\\config.properties");// for the windows
-		// ip = new FileInputStream("Properties/config.properties");// for linux
+		System.out.println("osname" + osName);
+
 		if (osName.equalsIgnoreCase("Linux")) {
 
 			ip = new FileInputStream("Properties/config.properties");
+			System.out.println("Property file path");
 
 		}
+		// osName = osName.trim();
+		else {
+			ip = new FileInputStream("Properties\\config.properties");
+		} // for the windows
+		// ip = new FileInputStream("Properties/config.properties");// for linux
 
 		prop.load(ip);
 
-		System.out.println(ip);
+		// System.out.println(ip);
 
 	}
 
