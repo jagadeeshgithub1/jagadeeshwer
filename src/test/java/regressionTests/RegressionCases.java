@@ -14,7 +14,7 @@ import driver.DriverEngine;
 
 public class RegressionCases {
 
-	DriverEngine driverEngine = null;
+	public DriverEngine driverEngine = null;
 	SoftAssert softAssert = new SoftAssert();
 
 	@BeforeClass
