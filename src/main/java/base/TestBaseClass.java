@@ -27,6 +27,8 @@ public class TestBaseClass {
 
 		prop.load(ip);
 
+		System.out.println(ip);
+
 	}
 
 	/*

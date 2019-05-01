@@ -65,8 +65,10 @@ public class DriverEngine extends TestBaseClass {
 
 		try {
 			excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
+			// excelUtils = new
+			// ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
 		} catch (Exception e) {
-			System.out.println("File didnt find in linux machine");
+			System.out.println("File didnt find machine");
 			Finalflag = false;
 
 			return Finalflag;
@@ -156,6 +158,11 @@ public class DriverEngine extends TestBaseClass {
 					TestData = excelUtils.getCellData(sheetName, Irow, "TestData");
 					TestCaseID = excelUtils.getCellData(sheetName, Irow, "TestCaseID");
 					Argument1 = excelUtils.getCellData(sheetName, Irow, "Argument1");
+
+					System.out.println(ActionKeyWord);
+					System.out.println(PageObject);
+					System.out.println(TestData);
+					System.out.println(Argument1);
 					// executeReflectionActions(PageObject,ActionKeyWord,TestData);
 					// executeReflectionActions();
 
