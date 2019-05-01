@@ -21,25 +21,25 @@ public class RegressionCases {
 	public void setUp() {
 
 		String osName = System.getProperty("os.name").trim();
-
+		// osName = "Linux";
 		System.out.println("Machine os:" + osName);
 		File srcFile = null;
 		File destDir = null;
 
-		srcFile = new File("TestDataAndResults\\TestData\\SophieAutomation.xlsx");
-		destDir = new File("TestDataAndResults\\Run1\\");
+		// srcFile = new File("TestDataAndResults\\TestData\\SophieAutomation.xlsx");
+		// destDir = new File("TestDataAndResults\\Run1\\");
+		srcFile = new File("TestDataAndResults/TestData/SophieAutomation.xlsx");
+		destDir = new File("TestDataAndResults/Run1/");
 
-		if (osName.indexOf("Linux") >= 0) {
-			try {
-				srcFile = new File("TestDataAndResults/TestData/SophieAutomation.xlsx");
-				destDir = new File("TestDataAndResults/Run1/");
-				System.out.println("path found");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				System.out.println("Path not found" + srcFile + destDir);
-			}
-
-		}
+		/*
+		 * if (osName.indexOf("Linux") >= 0) { try { srcFile = new
+		 * File("TestDataAndResults/TestData/SophieAutomation.xlsx"); destDir = new
+		 * File("TestDataAndResults/Run1/"); System.out.println("path found"); } catch
+		 * (Exception e) { // TODO Auto-generated catch block
+		 * System.out.println("Path not found" + srcFile + destDir); }
+		 * 
+		 * }
+		 */
 
 		System.out.println("source file:" + srcFile);
 		System.out.println("dest dir:" + destDir);
