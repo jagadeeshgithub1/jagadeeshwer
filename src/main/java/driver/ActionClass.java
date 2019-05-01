@@ -436,10 +436,7 @@ public class ActionClass extends TestBaseClass {
 		if (osName.equalsIgnoreCase("Linux")) {
 
 			try {
-				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver);
-				// downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
-				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
-				// downloadFilepath = System.getProperty("user.dir") + "/Downloads";
+
 				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
 
@@ -447,6 +444,8 @@ public class ActionClass extends TestBaseClass {
 
 				// flag;
 			} catch (Exception e) {
+				System.out.println("Exception in the openURL driver");
+				e.printStackTrace();
 				flag = false;
 				return flag;
 
@@ -481,7 +480,13 @@ public class ActionClass extends TestBaseClass {
 		chromePrefs.put("download.default_directory", downloadFilepath);
 		ChromeOptions options = new ChromeOptions();
 		options.setExperimentalOption("prefs", chromePrefs);
-		driver = new ChromeDriver(options);
+		try {
+			driver = new ChromeDriver(options);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("while driver = new ChromeDriver(options) ");
+			e.printStackTrace();
+		}
 
 		driver.manage().window().maximize();
 
