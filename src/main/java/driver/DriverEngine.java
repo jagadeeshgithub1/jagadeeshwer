@@ -64,10 +64,11 @@ public class DriverEngine extends TestBaseClass {
 		osName = System.getProperty("os.name");
 
 		try {
-			excelUtils = new ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");
-			if (osName == "Linux") {
-				excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx");
-			}
+			// excelUtils = new
+			// ExcelUtils("TestDataAndResults\\Run1\\SophieAutomation.xlsx");// for windows
+			// if (osName == "Linux") {
+			excelUtils = new ExcelUtils("TestDataAndResults/Run1/SophieAutomation.xlsx"); // for linux
+			// }
 
 		} catch (Exception e) {
 			Finalflag = false;

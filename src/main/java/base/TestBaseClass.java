@@ -16,13 +16,17 @@ public class TestBaseClass {
 
 		osName = System.getProperty("os.name");
 
-		ip = new FileInputStream("Properties\\config.properties");
+		// ip = new FileInputStream("Properties\\config.properties");// for the windows
 
-		if (osName == "Linux") {
+		ip = new FileInputStream("Properties/config.properties");
 
-			ip = new FileInputStream("Properties/config.properties");
-
-		}
+		/*
+		 * if (osName == "Linux") {
+		 * 
+		 * ip = new FileInputStream("Properties/config.properties");
+		 * 
+		 * }
+		 */
 
 		prop.load(ip);
 
