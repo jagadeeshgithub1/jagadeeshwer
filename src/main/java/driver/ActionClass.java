@@ -456,10 +456,11 @@ public class ActionClass extends TestBaseClass {
 			options.setExperimentalOption("prefs", chromePrefs);
 
 			// added the below 2 lines on 5/2/19
-			options.addArguments("--headless");
+
 			options.addArguments("--no-sandbox");
 			options.addArguments("--disable-dev-shm-usage");
-
+			options.addArguments("--headless");
+			options.addArguments("--disable-gpu");
 			try {
 				driver = new ChromeDriver(options);// some exception is coming hre
 			} catch (Exception e) {
