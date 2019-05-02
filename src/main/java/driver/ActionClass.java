@@ -462,8 +462,8 @@ public class ActionClass extends TestBaseClass {
 			options.addArguments("--headless");
 			options.addArguments("--disable-gpu");
 			try {
-				// driver = new ChromeDriver(options);// some exception is coming hre
-				driver = new ChromeDriver();
+				driver = new ChromeDriver(options);// some exception is coming hre
+				// driver = new ChromeDriver();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				System.out.println("while driver = new ChromeDriver(options)");
