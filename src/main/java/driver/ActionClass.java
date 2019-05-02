@@ -454,7 +454,13 @@ public class ActionClass extends TestBaseClass {
 			chromePrefs.put("download.default_directory", downloadFilepath);
 			ChromeOptions options = new ChromeOptions();
 			options.setExperimentalOption("prefs", chromePrefs);
-			driver = new ChromeDriver(options);
+			try {
+				driver = new ChromeDriver(options);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("while driver = new ChromeDriver(options)");
+				e.printStackTrace();
+			}
 
 			driver.manage().window().maximize();
 
