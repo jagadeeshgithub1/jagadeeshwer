@@ -458,9 +458,6 @@ public class ActionClass extends TestBaseClass {
 			try {
 				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
 				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
-				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
-				// downloadFilepath = System.getProperty("user.dir") + "/Downloads";
-
 				System.out.println("download path " + downloadFilepath);
 
 				// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
@@ -478,13 +475,13 @@ public class ActionClass extends TestBaseClass {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless");// for a headless browser run
 		options.setExperimentalOption("prefs", chromePrefs);
-		try {
-			driver = new ChromeDriver(options);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("while driver = new ChromeDriver(options) ");
-			e.printStackTrace();
-		}
+		// try {
+		driver = new ChromeDriver(options);
+		// } catch (Exception e) {
+		// TODO Auto-generated catch block
+		System.out.println("while driver = new ChromeDriver(options) failed ");
+		// e.printStackTrace();
+		// }
 
 		driver.manage().window().maximize();
 
