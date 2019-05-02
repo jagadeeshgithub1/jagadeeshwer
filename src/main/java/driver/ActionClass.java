@@ -454,6 +454,10 @@ public class ActionClass extends TestBaseClass {
 			chromePrefs.put("download.default_directory", downloadFilepath);
 			ChromeOptions options = new ChromeOptions();
 			options.setExperimentalOption("prefs", chromePrefs);
+
+			// added the below 2 lines on 5/2/19
+			options.addArguments("--no-sandbox");
+			options.addArguments("--disable-dev-shm-usage");
 			try {
 				driver = new ChromeDriver(options);
 			} catch (Exception e) {
