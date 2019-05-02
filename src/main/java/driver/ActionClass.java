@@ -437,7 +437,7 @@ public class ActionClass extends TestBaseClass {
 
 			try {
 
-				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
+				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriverwithp");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
 
 				System.out.println("download path " + downloadFilepath);
@@ -460,10 +460,7 @@ public class ActionClass extends TestBaseClass {
 				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
 				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 				// downloadFilepath = System.getProperty("user.dir") + "/Downloads";
-				if (osName.equalsIgnoreCase("Linux")) {
-					System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
-					downloadFilepath = System.getProperty("user.dir") + "/Downloads";
-				}
+
 				System.out.println("download path " + downloadFilepath);
 
 				// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
@@ -479,6 +476,7 @@ public class ActionClass extends TestBaseClass {
 		chromePrefs.put("profile.default_content_settings.popups", 0);
 		chromePrefs.put("download.default_directory", downloadFilepath);
 		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--headless");// for a headless browser run
 		options.setExperimentalOption("prefs", chromePrefs);
 		try {
 			driver = new ChromeDriver(options);
