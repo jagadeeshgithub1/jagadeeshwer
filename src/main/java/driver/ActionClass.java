@@ -430,67 +430,42 @@ public class ActionClass extends TestBaseClass {
 		 */
 		// initialization();
 		boolean flag = false;
-		String osName = System.getProperty("os.name");
-		System.out.println(osName);
+		String osName = System.getProperty("os.name").trim();
 		String downloadFilepath = null;
-		if (osName.equalsIgnoreCase("Linux")) {
-
-			try {
-
-				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriverwithp");
+		try {
+			// System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
+			// downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
+			// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
+			// downloadFilepath = System.getProperty("user.dir") + "/Downloads";
+			if (osName.equalsIgnoreCase("Linux")) {
+				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
-
-				System.out.println("download path " + downloadFilepath);
-
-				// flag;
-			} catch (Exception e) {
-				System.out.println("Exception in the openURL driver");
-				e.printStackTrace();
-				flag = false;
-				return flag;
-
-				// TODO: handle exception
-			}
-		}
-
-		else {
-
-			try {
+			} else {
 				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
 				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
-				System.out.println("download path " + downloadFilepath);
 
-				// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
-			} catch (Exception e) {
-
-				flag = false;
-				return flag;
-				// TODO: handle exception
 			}
+			System.out.println("download path " + downloadFilepath);
+
+			// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
+
+			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+			chromePrefs.put("profile.default_content_settings.popups", 0);
+			chromePrefs.put("download.default_directory", downloadFilepath);
+			ChromeOptions options = new ChromeOptions();
+			options.setExperimentalOption("prefs", chromePrefs);
+			driver = new ChromeDriver(options);
+
+			driver.manage().window().maximize();
+
+			driver.manage().deleteAllCookies();
+			driver.get(prop.getProperty("url"));
+			flag = true;
+		} catch (Exception e) {
+			flag = false;
+			// TODO: handle exception
 		}
-
-		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-		chromePrefs.put("profile.default_content_settings.popups", 0);
-		chromePrefs.put("download.default_directory", downloadFilepath);
-		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless");// for a headless browser run
-		options.setExperimentalOption("prefs", chromePrefs);
-		// try {
-		driver = new ChromeDriver(options);
-		// } catch (Exception e) {
-		// TODO Auto-generated catch block
-		System.out.println("while driver = new ChromeDriver(options) failed ");
-		// e.printStackTrace();
-		// }
-
-		driver.manage().window().maximize();
-
-		driver.manage().deleteAllCookies();
-		driver.get(prop.getProperty("url"));
-		flag = true;
-
 		return flag;
-
 	}
 
 	public boolean quitBrowser() {
