@@ -438,7 +438,7 @@ public class ActionClass extends TestBaseClass {
 			// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 			// downloadFilepath = System.getProperty("user.dir") + "/Downloads";
 			if (osName.equalsIgnoreCase("Linux")) {
-				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
+				System.setProperty("webdriver.chrome.driver", "/bin/chromedriver");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
 			} else {
 				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
