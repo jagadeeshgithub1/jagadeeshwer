@@ -443,6 +443,7 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		String osName = System.getProperty("os.name").trim();
 		String downloadFilepath = null;
+		long startTime = 0;
 		try {
 
 			if (osName.equalsIgnoreCase("Linux")) {
@@ -497,10 +498,15 @@ public class ActionClass extends TestBaseClass {
 			System.out.println("url is " + prop.getProperty("url"));
 			System.out.println("Title of the page during openURL:" + driver.getTitle());
 			System.out.println("driver>> " + driver.toString());
+			driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 			driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
+			startTime = System.currentTimeMillis();
 			driver.get(prop.getProperty("url"));
 
 			flag = true;
+		} catch (TimeoutException te) {
+			long estimatedTime = System.currentTimeMillis() - startTime;
+			System.out.println("it took>>> " + estimatedTime + " Time");
 		} catch (Exception e) {
 			flag = false;
 			// TODO: handle exception
