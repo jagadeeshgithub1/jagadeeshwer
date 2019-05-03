@@ -466,6 +466,7 @@ public class ActionClass extends TestBaseClass {
 			options.addArguments("--no-sandbox");
 			options.addArguments("--disable-dev-shm-usage");
 			options.addArguments("--headless");
+			options.addArguments("window-size=1200x600");
 			options.addArguments("--disable-gpu");
 
 			try {
