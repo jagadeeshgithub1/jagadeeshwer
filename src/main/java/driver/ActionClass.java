@@ -489,16 +489,18 @@ public class ActionClass extends TestBaseClass {
 				e.printStackTrace();
 			}
 			driver.manage().window().setSize(new Dimension(1920, 1200));
-			// driver.manage().window().maximize();
+			driver.manage().window().maximize();
 
 			driver.manage().deleteAllCookies();
 			driver.get(prop.getProperty("url"));
+			System.out.println("url is " + prop.getProperty("url"));
 			System.out.println("Title of the page during openURL:" + driver.getTitle());
 			System.out.println("driver>> " + driver.toString());
 			flag = true;
 		} catch (Exception e) {
 			flag = false;
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return flag;
 	}
