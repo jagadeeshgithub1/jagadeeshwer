@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -496,7 +497,7 @@ public class ActionClass extends TestBaseClass {
 			System.out.println("url is " + prop.getProperty("url"));
 			System.out.println("Title of the page during openURL:" + driver.getTitle());
 			System.out.println("driver>> " + driver.toString());
-
+			driver.manage().timeouts().pageLoadTimeout(400, TimeUnit.SECONDS);
 			driver.get(prop.getProperty("url"));
 
 			flag = true;
