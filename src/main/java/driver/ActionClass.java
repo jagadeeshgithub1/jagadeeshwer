@@ -79,6 +79,7 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 
 		try {
+			System.out.println("title of the page:" + driver.getTitle());
 			driver.findElement(By.xpath(prop.getProperty("txtUserName"))).sendKeys(prop.getProperty("username"));
 			driver.findElement(By.xpath(prop.getProperty("txtPassword"))).sendKeys(prop.getProperty("password"));
 			driver.findElement(By.xpath(prop.getProperty("btnLogin"))).click();
@@ -89,6 +90,7 @@ public class ActionClass extends TestBaseClass {
 
 		} catch (Exception e) {
 			flag = false;
+			System.out.println("login failed..");
 			// TODO: handle exception
 		}
 		return flag;
@@ -461,7 +463,7 @@ public class ActionClass extends TestBaseClass {
 			// added the below 2 lines on 5/2/19
 
 			options.addArguments("--no-sandbox");
-			// options.addArguments("--disable-dev-shm-usage");
+			options.addArguments("--disable-dev-shm-usage");
 			// options.addArguments("--headless");
 			// options.addArguments("--disable-gpu");
 
