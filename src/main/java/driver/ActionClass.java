@@ -80,6 +80,7 @@ public class ActionClass extends TestBaseClass {
 
 		try {
 			System.out.println("title of the page:" + driver.getTitle());
+
 			driver.findElement(By.xpath(prop.getProperty("txtUserName"))).sendKeys(prop.getProperty("username"));
 			driver.findElement(By.xpath(prop.getProperty("txtPassword"))).sendKeys(prop.getProperty("password"));
 			driver.findElement(By.xpath(prop.getProperty("btnLogin"))).click();
@@ -464,8 +465,8 @@ public class ActionClass extends TestBaseClass {
 
 			options.addArguments("--no-sandbox");
 			options.addArguments("--disable-dev-shm-usage");
-			// options.addArguments("--headless");
-			// options.addArguments("--disable-gpu");
+			options.addArguments("--headless");
+			options.addArguments("--disable-gpu");
 
 			try {
 				driver = new ChromeDriver(options);// some exception is coming hre
