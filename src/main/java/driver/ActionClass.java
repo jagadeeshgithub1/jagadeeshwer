@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
@@ -487,8 +488,8 @@ public class ActionClass extends TestBaseClass {
 				System.out.println("while driver = new ChromeDriver(options)");
 				e.printStackTrace();
 			}
-
-			driver.manage().window().maximize();
+			driver.manage().window().setSize(new Dimension(1920, 1200));
+			// driver.manage().window().maximize();
 
 			driver.manage().deleteAllCookies();
 			driver.get(prop.getProperty("url"));
