@@ -93,6 +93,7 @@ public class ActionClass extends TestBaseClass {
 		} catch (Exception e) {
 			flag = false;
 			System.out.println("login failed..");
+			e.printStackTrace();
 			// TODO: handle exception
 		}
 		return flag;
