@@ -82,6 +82,9 @@ public class ActionClass extends TestBaseClass {
 			driver.findElement(By.xpath(prop.getProperty("txtUserName"))).sendKeys(prop.getProperty("username"));
 			driver.findElement(By.xpath(prop.getProperty("txtPassword"))).sendKeys(prop.getProperty("password"));
 			driver.findElement(By.xpath(prop.getProperty("btnLogin"))).click();
+
+			System.out.println("title of the page:" + driver.getTitle());
+
 			flag = true;
 
 		} catch (Exception e) {
@@ -457,10 +460,11 @@ public class ActionClass extends TestBaseClass {
 
 			// added the below 2 lines on 5/2/19
 
-			options.addArguments("--no-sandbox");
-			options.addArguments("--disable-dev-shm-usage");
-			options.addArguments("--headless");
-			options.addArguments("--disable-gpu");
+			// options.addArguments("--no-sandbox");
+			// options.addArguments("--disable-dev-shm-usage");
+			// options.addArguments("--headless");
+			// options.addArguments("--disable-gpu");
+
 			try {
 				driver = new ChromeDriver(options);// some exception is coming hre
 				// driver = new ChromeDriver();
@@ -474,6 +478,7 @@ public class ActionClass extends TestBaseClass {
 
 			driver.manage().deleteAllCookies();
 			driver.get(prop.getProperty("url"));
+			System.out.println("Title of the page during openURL:" + driver.getTitle());
 			flag = true;
 		} catch (Exception e) {
 			flag = false;
