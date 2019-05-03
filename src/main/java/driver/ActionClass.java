@@ -475,7 +475,8 @@ public class ActionClass extends TestBaseClass {
 
 				// new changes on 5/3/19
 				// DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-				options.setCapability(CapabilityType.BROWSER_NAME, "chrome");
+				options.setCapability(CapabilityType.BROWSER_NAME, "htmlunit");
+				options.setCapability(CapabilityType.BROWSER_VERSION, "chrome");
 
 				driver = new HtmlUnitDriver(options);// for the headless mode
 				// driver = new ChromeDriver();
