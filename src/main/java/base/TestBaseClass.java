@@ -18,19 +18,24 @@ public class TestBaseClass {
 
 		System.out.println("osname" + osName);
 
-		if (osName.equalsIgnoreCase("Linux")) {
+		try {
+			if (osName.equalsIgnoreCase("Linux")) {
 
-			ip = new FileInputStream("Properties/config.properties");
-			System.out.println("Property file path");
+				ip = new FileInputStream("Properties/config.properties");
+				System.out.println("Property file path");
 
+			}
+			// osName = osName.trim();
+			else {
+				ip = new FileInputStream("Properties\\config.properties");
+			} // for the windows
+			// ip = new FileInputStream("Properties/config.properties");// for linux
+
+			prop.load(ip);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		// osName = osName.trim();
-		else {
-			ip = new FileInputStream("Properties\\config.properties");
-		} // for the windows
-		// ip = new FileInputStream("Properties/config.properties");// for linux
-
-		prop.load(ip);
 
 		// System.out.println(ip);
 
