@@ -469,7 +469,7 @@ public class ActionClass extends TestBaseClass {
 
 			try {
 				// driver = new ChromeDriver(options);// some exception is coming hre
-				driver = new HtmlUnitDriver(options);// for the headless mode
+				driver = new HtmlUnitDriver();// for the headless mode
 				// driver = new ChromeDriver();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
