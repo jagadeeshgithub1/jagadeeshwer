@@ -24,8 +24,8 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -440,10 +440,7 @@ public class ActionClass extends TestBaseClass {
 		String osName = System.getProperty("os.name").trim();
 		String downloadFilepath = null;
 		try {
-			// System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
-			// downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
-			// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
-			// downloadFilepath = System.getProperty("user.dir") + "/Downloads";
+
 			if (osName.equalsIgnoreCase("Linux")) {
 				System.setProperty("webdriver.chrome.driver", "/bin/chromedriver"); // added the new path for linux
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
@@ -471,7 +468,8 @@ public class ActionClass extends TestBaseClass {
 			options.addArguments("--disable-gpu");
 
 			try {
-				driver = new ChromeDriver(options);// some exception is coming hre
+				// driver = new ChromeDriver(options);// some exception is coming hre
+				driver = new HtmlUnitDriver(options);// for the headless mode
 				// driver = new ChromeDriver();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
