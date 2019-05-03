@@ -27,6 +27,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -469,7 +471,12 @@ public class ActionClass extends TestBaseClass {
 
 			try {
 				// driver = new ChromeDriver(options);// some exception is coming hre
-				driver = new HtmlUnitDriver();// for the headless mode
+
+				// new changes on 5/3/19
+				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				capabilities.setCapability(CapabilityType.BROWSER_NAME, "chrome");
+
+				driver = new HtmlUnitDriver(capabilities);// for the headless mode
 				// driver = new ChromeDriver();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
