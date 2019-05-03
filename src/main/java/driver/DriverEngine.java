@@ -440,7 +440,7 @@ public class DriverEngine extends TestBaseClass {
 
 			Result = excelUtils.getCellData(sheetName, i, "Results");
 			System.out.println(Result);
-			if (Result == null || Result == "Fail") {
+			if (Result == null || Result.equalsIgnoreCase("Fail")) {
 
 				finalResult = false;
 				return finalResult;
