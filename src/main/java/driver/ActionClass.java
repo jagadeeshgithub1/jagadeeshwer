@@ -79,6 +79,7 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 
 		try {
+			System.out.println("driver>> " + driver.toString());
 			System.out.println("title of the page:" + driver.getTitle());
 
 			driver.findElement(By.xpath(prop.getProperty("txtUserName"))).sendKeys(prop.getProperty("username"));
@@ -483,6 +484,7 @@ public class ActionClass extends TestBaseClass {
 			driver.manage().deleteAllCookies();
 			driver.get(prop.getProperty("url"));
 			System.out.println("Title of the page during openURL:" + driver.getTitle());
+			System.out.println("driver>> " + driver.toString());
 			flag = true;
 		} catch (Exception e) {
 			flag = false;
