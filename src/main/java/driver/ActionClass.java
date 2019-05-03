@@ -24,15 +24,14 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.opencsv.CSVReader;
 
 import base.TestBaseClass;
@@ -457,28 +456,30 @@ public class ActionClass extends TestBaseClass {
 			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 			chromePrefs.put("profile.default_content_settings.popups", 0);
 			chromePrefs.put("download.default_directory", downloadFilepath);
-			ChromeOptions options = new ChromeOptions();
+			// ChromeOptions options = new ChromeOptions();
 			// options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
 			// UnexpectedAlertBehaviour.IGNORE);
-			options.setExperimentalOption("prefs", chromePrefs);
+			// options.setExperimentalOption("prefs", chromePrefs);
 
 			// added the below 2 lines on 5/2/19
 
-			options.addArguments("--no-sandbox");
-			options.addArguments("--disable-dev-shm-usage");
-			options.addArguments("--headless");
-			options.addArguments("window-size=1200x600");
-			options.addArguments("--disable-gpu");
+			/*
+			 * options.addArguments("--no-sandbox");
+			 * options.addArguments("--disable-dev-shm-usage");
+			 * options.addArguments("--headless");
+			 * options.addArguments("window-size=1200x600");
+			 * options.addArguments("--disable-gpu");
+			 */
 
 			try {
 				// driver = new ChromeDriver(options);// some exception is coming hre
 
 				// new changes on 5/3/19
 				// DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-				options.setCapability(CapabilityType.BROWSER_NAME, "htmlunit");
-				options.setCapability(CapabilityType.BROWSER_VERSION, "chrome");
+				// options.setCapability(CapabilityType.BROWSER_NAME, "htmlunit");
+				// options.setCapability(CapabilityType.BROWSER_VERSION, "chrome");
 
-				driver = new HtmlUnitDriver(options);// for the headless mode
+				driver = new HtmlUnitDriver(BrowserVersion.CHROME);// for the headless mode
 				// driver = new ChromeDriver();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
