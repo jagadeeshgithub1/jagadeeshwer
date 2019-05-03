@@ -497,7 +497,7 @@ public class ActionClass extends TestBaseClass {
 			System.out.println("url is " + prop.getProperty("url"));
 			System.out.println("Title of the page during openURL:" + driver.getTitle());
 			System.out.println("driver>> " + driver.toString());
-			driver.manage().timeouts().pageLoadTimeout(400, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
 			driver.get(prop.getProperty("url"));
 
 			flag = true;
