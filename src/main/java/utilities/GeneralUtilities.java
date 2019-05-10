@@ -112,7 +112,7 @@ public class GeneralUtilities extends ActionClass {
 		chromePrefs.put("download.default_directory", downloadFilepath);
 		ChromeOptions options = new ChromeOptions();
 		options.setExperimentalOption("prefs", chromePrefs);
-		driver = new ChromeDriver(options);
+		//driver = new ChromeDriver(options);
 	}
 
 	public File getLatestFileFromDir(String dirPath, String pattern) {

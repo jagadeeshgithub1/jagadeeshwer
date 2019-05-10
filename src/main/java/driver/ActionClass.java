@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +38,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.opencsv.CSVReader;
 
 import base.TestBaseClass;
@@ -53,7 +57,8 @@ import utilities.GeneralUtilities;
  */
 public class ActionClass extends TestBaseClass {
 
-	public static WebDriver driver;
+	public static WebDriver driver=null;
+	//public static HtmlUnitDriver driver;
 
 	public ActionClass() throws Exception {
 
@@ -87,12 +92,27 @@ public class ActionClass extends TestBaseClass {
 			System.out.println("in login>>>>>>>>>>>>>>>>>>>");
 			System.out.println("driver>> " + driver.toString());
 			System.out.println("title of the page:" + driver.getTitle());
-
+			System.out.println(prop.getProperty("username"));
+			System.out.println(prop.getProperty("password"));
+			
+			WebElement userName= driver.findElement(By.xpath(prop.getProperty("txtUserName")));
+			if(userName.isDisplayed())
 			driver.findElement(By.xpath(prop.getProperty("txtUserName"))).sendKeys(prop.getProperty("username"));
+			WebElement pwd=driver.findElement(By.xpath(prop.getProperty("txtPassword")));
+			if(pwd.isDisplayed())
 			driver.findElement(By.xpath(prop.getProperty("txtPassword"))).sendKeys(prop.getProperty("password"));
-			driver.findElement(By.xpath(prop.getProperty("btnLogin"))).click();
+			driver.findElement(By.xpath(prop.getProperty("btnLogin"))).click();//here we get the type error  for getExtension
+			//if(driver.findElement(By.id("error")).isDisplayed()) {
+			//System.out.println(driver.findElement(By.id("error")).getText());
 
 			System.out.println("title of the page:" + driver.getTitle());
+			
+			//PrintStream printStream= new PrintStream("./PageSource.txt");
+			//System.setOut(printStream);
+			
+			//System.out.println("PageSource of DesinerStudio>>>>"+driver.getPageSource());
+			
+			//System.out.println("---------------end-----------------");
 
 			flag = true;
 
@@ -126,23 +146,35 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		try {
 
-			boolean ele = new WebDriverWait(driver, 30).until(ExpectedConditions.and(
+			/*boolean ele = new WebDriverWait(driver, 60).until(ExpectedConditions.and(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
-					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
-			if (ele == true) {
+					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));*/
+			
+			
+			
+			System.out.println("object name:"+object);
+			
+			WebElement ele=new WebDriverWait(driver, 60).until(ExpectedConditions.presenceOfElementLocated(By.xpath(prop.getProperty(object))));
+			// WebElement webElement = webDriver.findElement(By.xpath("//div[@id='mainPane']/form/table/tbody/tr[10]/td/a[2]"));
 
-				WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
+			//HtmlAnchor anchor= new 
+			if (ele!=null) {
+				
 
-				Actions action = new Actions(driver);
-				System.out.println("is this the element???>>" + element);
-				action.moveToElement(element).click(element).build().perform();
-				Thread.sleep(5000);
+				//WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
+
+				//Actions action = new Actions(driver);
+				System.out.println("is this the element???>>" + ele);
+				//action.moveToElement(element).click(element).build().perform();
+				//Thread.sleep(5000);
 				// action.moveToElement(element).sendKeys(Keys.RETURN);
-				// driver.findElement(By.xpath(prop.getProperty(object))).click();
-
+				ele.click();
+				
+				//System.out.println(driver.getPageSource());
+				
 				flag = true;
 			} else {
-				System.out.println("run engine is not clicked..");
+				System.out.println("Element"+ object +"is not present");
 				flag = false;
 			}
 
@@ -154,6 +186,72 @@ public class ActionClass extends TestBaseClass {
 		} catch (Exception e) {
 			System.out.println("element is not present");
 			flag = false;
+			// TODO: handle exception
+		}
+
+		// TODO: handle exception
+		return flag;
+	}
+
+	public boolean csvDownloadclick(String object) {
+		/*
+		 * @author :Deepa Panikkaveetil
+		 *
+		 * 
+		 * @date :3/19/2019
+		 * 
+		 * @modified by:
+		 * 
+		 * @modified date:
+		 * 
+		 * @USEFOR :The method is to clik on any web element
+		 * 
+		 * @Parameters:Passing the xpath locator from the properties file
+		 * 
+		 * 
+		 * 
+		 */
+		boolean flag = false;
+		try {
+
+			boolean ele = new WebDriverWait(driver, 300).until(ExpectedConditions.and(
+					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
+					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
+			if (ele == true) {
+
+				WebElement element = driver.findElement(By.xpath(prop.getProperty(object)));
+
+				// Actions action = new Actions(driver);
+				System.out.println("is this the element???>>" + element);
+				element.click();
+				// action.moveToElement(element).click(element).build().perform();
+
+				Thread.sleep(5000);
+
+				// action.moveToElement(element).sendKeys(Keys.RETURN);
+				// driver.findElement(By.xpath(prop.getProperty(object))).click();
+				if (driver.getPageSource().equalsIgnoreCase("Data Set BatchDecisionOutput is empty")) {
+					flag = false;
+					System.out.println("Dataset is empty");
+					return flag;
+				}
+				flag = true;
+			} else {
+				System.out.println("run engine is not clicked..");
+				flag = false;
+				return flag;
+			}
+
+		} catch (TimeoutException e) {
+
+			System.out.println("Are you sure the element is present");
+			flag = false;
+			return flag;
+			// TODO: handle exception
+		} catch (Exception e) {
+			System.out.println("element is not present" + " " + e.getMessage());
+			flag = false;
+			return flag;
 			// TODO: handle exception
 		}
 
@@ -182,7 +280,7 @@ public class ActionClass extends TestBaseClass {
 		boolean flag = false;
 		try {
 
-			boolean ele = new WebDriverWait(driver, 300).until(ExpectedConditions.and(
+			boolean ele = new WebDriverWait(driver, 200).until(ExpectedConditions.and(
 					ExpectedConditions.visibilityOfElementLocated(By.xpath(prop.getProperty(object))),
 					ExpectedConditions.elementToBeClickable(By.xpath(prop.getProperty(object)))));
 			if (ele == true) {
@@ -384,7 +482,7 @@ public class ActionClass extends TestBaseClass {
 			System.out.println("Rollback button is not present");
 			return flag;
 		}
-		// code to click the button of the baseline version tab
+		// code to the button of the baseline version tab
 		try {
 			btnRollbackTab.click();
 			flag = true;
@@ -425,7 +523,7 @@ public class ActionClass extends TestBaseClass {
 
 	}
 
-	public boolean windowsopenURLwindows() {
+	public boolean openURLWindows() {
 		/*
 		 * @author:Deepa Panikkaeetil
 		 * 
@@ -465,7 +563,7 @@ public class ActionClass extends TestBaseClass {
 				chromePrefs.put("download.default_directory", downloadFilepath);
 				ChromeOptions options = new ChromeOptions();
 				options.setExperimentalOption("prefs", chromePrefs);
-				driver = new ChromeDriver(options);
+				//driver = new ChromeDriver(options);
 
 				driver.manage().window().maximize();
 
@@ -497,7 +595,7 @@ public class ActionClass extends TestBaseClass {
 				chromePrefs.put("download.default_directory", downloadFilepath);
 				ChromeOptions options = new ChromeOptions();
 				options.setExperimentalOption("prefs", chromePrefs);
-				driver = new ChromeDriver(options);
+				//driver = new ChromeDriver(options);
 
 				driver.manage().window().maximize();
 
@@ -539,7 +637,8 @@ public class ActionClass extends TestBaseClass {
 		try {
 
 			if (osName.equalsIgnoreCase("Linux")) {
-				System.setProperty("webdriver.chrome.driver", "/bin/chromedriver"); // added the new path for linux
+				//System.setProperty("webdriver.chrome.driver", "/bin/chromedriver"); // added the new path for linux
+				System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
 			} else {
 				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
@@ -550,32 +649,33 @@ public class ActionClass extends TestBaseClass {
 
 			// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
 
-			HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
-			chromePrefs.put("profile.default_content_settings.popups", 0);
-			chromePrefs.put("download.default_directory", downloadFilepath);
+			//HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+			//chromePrefs.put("profile.default_content_settings.popups", 0);
+			//chromePrefs.put("download.default_directory", downloadFilepath);
 			ChromeOptions options = new ChromeOptions();
 			// options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
 			// UnexpectedAlertBehaviour.IGNORE);
-			options.setExperimentalOption("prefs", chromePrefs);
+		//	options.setExperimentalOption("prefs", chromePrefs);
 
 			// added the below 2 lines on 5/2/19
 
-			options.addArguments("--no-sandbox");
-			options.addArguments("--disable-dev-shm-usage");
+			//options.addArguments("--no-sandbox");
+			//options.addArguments("--disable-dev-shm-usage");
 			options.addArguments("--headless");
-			options.addArguments("window-size=1200x600");
-			options.addArguments("--disable-gpu");
+			//options.addArguments("window-size=1200x600");
+			//options.addArguments("--disable-gpu"); 
 
 			try {
-				// driver = new ChromeDriver(options);// some exception is coming hre
+				driver = new ChromeDriver(options);// some exception is coming hre
 
 				// new changes on 5/3/19
-				DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-				options.setCapability(CapabilityType.BROWSER_NAME, "htmlunit");
-				options.setCapability(CapabilityType.BROWSER_VERSION, "chrome");
+				//DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+				/*options.setCapability(CapabilityType.BROWSER_NAME, "htmlunit");
+				options.setCapability(CapabilityType.BROWSER_VERSION, "chrome");*/
 
 				// driver = new HtmlUnitDriver(BrowserVersion.CHROME);// for the headless mode
-				driver = new HtmlUnitDriver(options);
+				//driver = new HtmlUnitDriver(BrowserVersion.CHROME,true);
+				//driver.setJavascriptEnabled(true);
 				// driver = new ChromeDriver();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -593,6 +693,8 @@ public class ActionClass extends TestBaseClass {
 			driver.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
 			startTime = System.currentTimeMillis();
 			driver.get(prop.getProperty("url"));
+			
+			System.out.println("getpageSource of Login>>"+driver.getPageSource());
 
 			flag = true;
 		} catch (TimeoutException te) {
