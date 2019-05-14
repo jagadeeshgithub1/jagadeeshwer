@@ -83,7 +83,7 @@ public class ActionClass extends TestBaseClass {
 
 		try {
 			System.out.println("in login>>>>>>>>>>>>>>>>>>>");
-			System.out.println("driver>> " + driver.toString());
+			//System.out.println("driver>> " + driver.toString());
 			System.out.println("title of the page:" + driver.getTitle());
 			System.out.println(prop.getProperty("username"));
 			System.out.println(prop.getProperty("password"));
@@ -634,15 +634,15 @@ public class ActionClass extends TestBaseClass {
 		try {
 
 			if (osName.equalsIgnoreCase("Linux")) {
-				System.setProperty("webdriver.chrome.driver", "/bin/chromedriver"); // added the new path for linux
-				// System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver");
+				//System.setProperty("webdriver.chrome.driver", "/bin/chromedriver"); // added the new path for linux
+				 System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver2");
 				downloadFilepath = System.getProperty("user.dir") + "/Downloads";
 			} else {
 				System.setProperty("webdriver.chrome.driver", "Drivers\\chromedriver.exe");
 				downloadFilepath = System.getProperty("user.dir") + "\\Downloads";
 
 			}
-			System.out.println("download path " + downloadFilepath);
+			System.out.println("download path" + downloadFilepath);
 
 			// String downloadFilepath = prop.getProperty("DOWNLOADPATH");
 

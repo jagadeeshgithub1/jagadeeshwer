@@ -64,7 +64,7 @@ public class RegressionCases {
 		}
 	}
 
-	@Test(priority = 1)
+	@Test(priority = 1, enabled = false)
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
@@ -104,7 +104,7 @@ public class RegressionCases {
 
 	}
 
-	@Test(priority = 4, enabled = false)
+	@Test(priority = 1)
 	public void Verify_Deleted_Offer_Is_Not_Present_In_CSV() {
 		if (!driverEngine.mainMethod("VerifyDeleteOffer")) {
 
