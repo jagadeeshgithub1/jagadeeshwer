@@ -68,10 +68,12 @@ public class RegressionCases {
 	// First test to validate the CSV after engine run
 	public void Verify_DownloadedCSV_For_Existing_Version() {
 
-		if (!driverEngine.mainMethod("VerifyCSVForExistingVersion")) {
-			Assert.assertTrue(false);
-			Reporter.log("failed to find test sheet");
-		}
+		/*
+		 * if (!driverEngine.mainMethod("VerifyCSVForExistingVersion")) {
+		 * Assert.assertTrue(false); Reporter.log("failed to find test sheet"); }
+		 */
+
+		Assert.assertTrue(driverEngine.mainMethod("VerifyCSVForExistingVersion"));
 
 		// TODO Auto-generated catch block
 

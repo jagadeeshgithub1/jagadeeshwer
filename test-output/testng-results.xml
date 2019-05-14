@@ -2,22 +2,22 @@
 <testng-results skipped="0" failed="1" ignored="3" total="4" passed="0">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="1386645" started-at="2019-05-10T09:14:41Z" finished-at="2019-05-10T09:37:48Z">
+  <suite name="Default suite" duration-ms="638974" started-at="2019-05-13T11:59:16Z" finished-at="2019-05-13T12:09:55Z">
     <groups>
     </groups>
-    <test name="Default test" duration-ms="1386645" started-at="2019-05-10T09:14:41Z" finished-at="2019-05-10T09:37:48Z">
+    <test name="Default test" duration-ms="638974" started-at="2019-05-13T11:59:16Z" finished-at="2019-05-13T12:09:55Z">
       <class name="regressionTests.RegressionCases">
-        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@68c72235]" name="setUp" is-config="true" duration-ms="22" started-at="2019-05-10T09:14:41Z" finished-at="2019-05-10T09:14:41Z">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:regressionTests.RegressionCases@543c6f6d]" name="setUp" is-config="true" duration-ms="85" started-at="2019-05-13T11:59:16Z" finished-at="2019-05-13T11:59:16Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@68c72235]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="1386531" started-at="2019-05-10T09:14:41Z" finished-at="2019-05-10T09:37:48Z">
+        <test-method status="FAIL" signature="Verify_DownloadedCSV_For_Existing_Version()[pri:1, instance:regressionTests.RegressionCases@543c6f6d]" name="Verify_DownloadedCSV_For_Existing_Version" duration-ms="638835" started-at="2019-05-13T11:59:17Z" finished-at="2019-05-13T12:09:55Z">
           <exception class="java.lang.NullPointerException">
             <full-stacktrace>
               <![CDATA[java.lang.NullPointerException
-at driver.ActionClass.checkboxSelect(ActionClass.java:903)
+at driver.ActionClass.checkboxSelect(ActionClass.java:919)
 at driver.DriverEngine.mainMethod(DriverEngine.java:251)
-at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:71)
+at regressionTests.RegressionCases.Verify_DownloadedCSV_For_Existing_Version(RegressionCases.java:76)
 at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
